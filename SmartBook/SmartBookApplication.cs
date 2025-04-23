@@ -19,6 +19,7 @@ public class SmartBookApplication
                 Console.WriteLine("Please enter some input!");
             }
 
+
             switch(input) {
                 case '1':
                 break;
