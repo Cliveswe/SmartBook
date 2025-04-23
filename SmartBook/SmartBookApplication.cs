@@ -22,6 +22,7 @@ public class SmartBookApplication
 
             switch(input) {
                 case '1':
+                AddNewBook();
                 break;
                 case '0':
                 Environment.Exit(0);
@@ -32,6 +33,24 @@ public class SmartBookApplication
             }
 
         }
+    }
+
+    private void AddNewBook() {
+        string title = string.Empty;
+        string author = string.Empty;
+        int isbn = 0;
+        string category = string.Empty;
+
+        Console.WriteLine("Enter details of the book.");
+        Console.Write("Title: ");
+        title = Console.ReadLine();
+        Console.Write("Author: ");
+        title = Console.ReadLine();
+        Console.Write("ISBN: ");
+        int.TryParse(Console.ReadLine(), out isbn);
+        Console.Write("Category: ");
+        category = Console.ReadLine();
+
     }
 
     private void DisplayMainMenu() {
