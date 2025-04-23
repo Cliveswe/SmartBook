@@ -1,5 +1,7 @@
 ﻿
 
+using SmartBook.Extensions;
+
 namespace SmartBook;
 
 public class SmartBookApplication
@@ -42,14 +44,11 @@ public class SmartBookApplication
         string category = string.Empty;
 
         Console.WriteLine("Enter details of the book.");
-        Console.Write("Title: ");
-        title = Console.ReadLine();
-        Console.Write("Author: ");
-        title = Console.ReadLine();
-        Console.Write("ISBN: ");
-        int.TryParse(Console.ReadLine(), out isbn);
-        Console.Write("Category: ");
-        category = Console.ReadLine();
+        title = ConsoleInputExtensions.GetBookDetails("Title");
+        author = ConsoleInputExtensions.GetBookDetails("Author");
+        category = title = ConsoleInputExtensions.GetBookDetails("Category");
+        ConsoleInputExtensions.GetBookISBN("ISBN", out isbn);
+
 
     }
 

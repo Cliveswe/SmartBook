@@ -5,6 +5,8 @@ VisualStudioVersion = 17.13.35931.197 d17.13
 MinimumVisualStudioVersion = 10.0.40219.1
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "SmartBook", "SmartBook\SmartBook.csproj", "{93A38EC5-F8B0-41A9-AB5A-3C454A7C07F9}"
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "SmartBook.Extensions", "SmartBook.Extensions\SmartBook.Extensions.csproj", "{521084F5-4808-4CCE-958E-E74A22AFF717}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -15,6 +17,10 @@ Global
 		{93A38EC5-F8B0-41A9-AB5A-3C454A7C07F9}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{93A38EC5-F8B0-41A9-AB5A-3C454A7C07F9}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{93A38EC5-F8B0-41A9-AB5A-3C454A7C07F9}.Release|Any CPU.Build.0 = Release|Any CPU
+		{521084F5-4808-4CCE-958E-E74A22AFF717}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{521084F5-4808-4CCE-958E-E74A22AFF717}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{521084F5-4808-4CCE-958E-E74A22AFF717}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{521084F5-4808-4CCE-958E-E74A22AFF717}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
