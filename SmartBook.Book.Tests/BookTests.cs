@@ -78,10 +78,11 @@ public class BookTests
     [InlineData("Laborum Et Dolore", "", "Poetry", "9788901234567", "Author cannot be empty!")]
     [InlineData("Laborum Et Dolore", "Fugiat N. Nulla", "", "9788901234567", "Category cannot be empty!")]
     [InlineData("Laborum Et Dolore", "Fugiat N. Nulla", "Poetry", "", "ISBN cannot be empty!")]
+    [InlineData(" ", "Fugiat N. Nulla", "Poetry", "9788901234567", "Title cannot be empty!")]
     public void CreateANewBookWithMissingTitleTest(string title, string author, string category, string isbn, string expected) {
 
         //Arrange
-        // Book book = new("", "Fugiat N. Nulla", "Poetry", "9788901234567");
+
         //Act
         var caughtExecption = Assert.Throws<ArgumentException>(() => new Book(title, author, category, isbn));
 

@@ -8,32 +8,28 @@ public class Book
 
     public string Title {
         get => title;
-
-        private set => title = string.IsNullOrEmpty(value) ? throw new ArgumentException("Title cannot be empty!") : value;
+        private set => title = string.IsNullOrWhiteSpace(value.Trim()) ? throw new ArgumentException("Title cannot be empty!") : value;
     }
 
     private string author;
 
     public string Author {
         get => author;
-        private set => author = string.IsNullOrEmpty(value) ? throw new ArgumentException("Author cannot be empty!") : value;
+        private set => author = string.IsNullOrWhiteSpace(value.Trim()) ? throw new ArgumentException("Author cannot be empty!") : value;
     }
 
     private string category;
 
     public string Category {
         get => category;
-
-        private set => category = string.IsNullOrEmpty(value) ? throw new ArgumentException("Category cannot be empty!") : value;
+        private set => category = string.IsNullOrWhiteSpace(value.Trim()) ? throw new ArgumentException("Category cannot be empty!") : value;
     }
-
 
     private string isbn;
 
     public string ISBN {
         get => isbn;
-
-        private set => isbn = string.IsNullOrEmpty(value) ? throw new ArgumentException("ISBN cannot be empty!") : value;
+        private set => isbn = string.IsNullOrWhiteSpace(value.Trim()) ? throw new ArgumentException("ISBN cannot be empty!") : value;
     }
     public Book(string title, string author, string category, string isbn) {
         try {
