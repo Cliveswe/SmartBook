@@ -5,55 +5,55 @@ namespace SmartBook;
 public class BookTests
 {
     /*
-    Title: Dolor Sit Amet
-    Author: Lorem T. Ipsum
-    Category: Fiction
-    ISBN: 9781234567890
+Title: Lorem Ipsum Chronicles
+Author: Dolor Sit
+Category: Fiction
+ISBN: 978-0-123456-47-2
 
-    Title: Consectetur Adipiscing Elit
-    Author: Aenean V. Vitae
-    Category: SelfHelp
-    ISBN: 9780987654321
+Title: Adventures of Amet Elit
+Author: Amet Elit
+Category: Fantasy
+ISBN: 978-1-234567-89-7
 
-    Title: Ut Enim Ad Minim
-    Author: Cillum D. Tempor
-    Category: Science Fiction
-    ISBN: 9781112233445
+Title: Sed Do Temporalis
+Author: Incididunt Ut
+Category: Science Fiction
+ISBN: 978-0-321-56789-0
 
-    Title: Exercitation Ullamco Laboris
-    Author: Magna A. Aliqua
-    Category: Thriller
-    ISBN: 9783456789012
+Title: Labore et Dolore: A Mystery
+Author: Magna Aliqua
+Category: Mystery
+ISBN: 978-3-16-148410-0
 
-    Title: Nisi Ut Aliquip
-    Author: Commodo C. Consequat
-    Category: Romance
-    ISBN: 9782123456789
+Title: Ut Enim Veniam
+Author: Quis Nostrud
+Category: Romance
+ISBN: 978-0-262-13472-9
 
-    Title: Duis Aute Irure Dolor
-    Author: Reprehenderit I. Voluptate
-    Category: Mystery
-    ISBN: 9784567890123
+Title: Exercitationem: The Escape
+Author: Laboris Nisi
+Category: Thriller
+ISBN: 978-1-4028-9462-6
 
-    Title: Velit Esse Cillum
-    Author: Eu F. Fugiat
-    Category: Historical Fiction
-    ISBN: 9785678901234
+Title: Aliquip Commodo Quest
+Author: Duis Consequat
+Category: Adventure
+ISBN: 978-0-395-19395-8
 
-    Title: Cupidatat Non Proident
-    Author: Sunt I. Culpa
-    Category: Biography
-    ISBN: 9786789012345
+Title: Reprehenderit Voluptate: A Tale
+Author: Velit Esse
+Category: Historical Fiction
+ISBN: 978-0-7432-7356-5
 
-    Title: Officia Deserunt Mollit
-    Author: Anim E. Est
-    Category: Horror
-    ISBN: 9787890123456
+Title: Cillum Dolore Eu
+Author: Fugiat Nulla
+Category: Horror
+ISBN: 978-0-7432-7357-2
 
-    Title: Laborum Et Dolore
-    Author: Fugiat N. Nulla
-    Category: Poetry
-    ISBN: 9788901234567
+Title: Excepteur Sint Biography
+Author: Cupidatat Non
+Category: Biography
+ISBN: 978-1-56619-909-4
     **/
 
 
