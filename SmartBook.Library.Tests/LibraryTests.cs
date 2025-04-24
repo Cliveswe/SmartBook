@@ -1,4 +1,7 @@
-﻿namespace SmartBook.Library.Tests;
+﻿using SmartBook.Repository;
+using SmartBook.Tests;
+
+namespace SmartBook;
 
 public class UnitTest1
 {
@@ -55,8 +58,19 @@ Category: Biography
 ISBN: 978-1-56619-909-4
     **/
 
-    [Fact]
-    public void Test1() {
+
+    [Theory]
+    [InlineData("Lorem Ipsum Chronicles", "Dolor Sit", "Fiction", "978-0-123456-47-2", 1)]
+    public void AddOneBookToTheLibraryTest(string title, string author, string category, string isbn, int expected) {
+        //Arrange
+        Library library = Library.Instance;
+        Book book = new(title, author, category, isbn);
+
+        //Act
+        library.AddBook(book);
+
+        //Assert
+        Assert.Equal(expected, library.NumberOfBooks);
 
     }
 }

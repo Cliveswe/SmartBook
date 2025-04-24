@@ -17,7 +17,6 @@ public class Library : IEnumerable<Book>
         private set => books = value;
     }
 
-
     private static Library instance;
     /// <summary>
     /// Singleton instance of the Library class.
@@ -29,6 +28,15 @@ public class Library : IEnumerable<Book>
                 instance = new Library();
 
             return instance;
+        }
+    }
+
+    /// <summary>
+    /// Gets the number of books in the library.
+    /// </summary>
+    public int NumberOfBooks {
+        get {
+            return Instance.Books.Count;
         }
     }
 
