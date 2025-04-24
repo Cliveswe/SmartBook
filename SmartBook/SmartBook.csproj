@@ -8,10 +8,6 @@
   </PropertyGroup>
 
   <ItemGroup>
-    <Folder Include="Repository\" />
-  </ItemGroup>
-
-  <ItemGroup>
     <ProjectReference Include="..\SmartBook.Extensions\SmartBook.Extensions.csproj" />
   </ItemGroup>
 
