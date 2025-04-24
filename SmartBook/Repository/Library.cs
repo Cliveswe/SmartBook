@@ -1,10 +1,11 @@
 ﻿using SmartBook.Tests;
+using System.Collections;
 
 namespace SmartBook.Repository;
 /// <summary>
 /// Singleton class that represents a library.
 /// </summary>
-public class Library
+public class Library : IEnumerable<Book>
 {
 
     private List<Book> books;
@@ -64,4 +65,11 @@ public class Library
         books.Remove(book);
     }
 
+    public IEnumerator<Book> GetEnumerator() {
+        throw new NotImplementedException();
+    }
+
+    IEnumerator IEnumerable.GetEnumerator() {
+        return GetEnumerator();
+    }
 }
