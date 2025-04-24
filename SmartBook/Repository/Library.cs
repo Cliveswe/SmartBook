@@ -36,7 +36,7 @@ public class Library : IEnumerable<Book>
     /// </summary>
     public int NumberOfBooks {
         get {
-            return Instance.Books.Count;
+            return books.Count;
         }
     }
 
@@ -79,5 +79,11 @@ public class Library : IEnumerable<Book>
 
     IEnumerator IEnumerable.GetEnumerator() {
         return GetEnumerator();
+    }
+
+    public void ClearLibrary() {
+        if(Books.Count > 0) {
+            books.Clear();
+        }
     }
 }
