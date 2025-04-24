@@ -1,4 +1,6 @@
-﻿namespace SmartBook.Tests;
+﻿using Xunit;
+
+namespace SmartBook.Tests;
 
 public class BookTests
 {
@@ -6,51 +8,69 @@ public class BookTests
 Title: Dolor Sit Amet
 Author: Lorem T. Ipsum
 Category: Fiction
-ISBN: 978-1-23456-789-0
+ISBN: 9781234567890
 
 Title: Consectetur Adipiscing Elit
 Author: Aenean V. Vitae
-Category: Self-Help
-ISBN: 978-0-98765-432-1
+Category: SelfHelp
+ISBN: 9780987654321
 
 Title: Ut Enim Ad Minim
 Author: Cillum D. Tempor
 Category: Science Fiction
-ISBN: 978-1-11223-344-5
+ISBN: 9781112233445
 
 Title: Exercitation Ullamco Laboris
 Author: Magna A. Aliqua
 Category: Thriller
-ISBN: 978-3-45678-901-2
+ISBN: 9783456789012
 
 Title: Nisi Ut Aliquip
 Author: Commodo C. Consequat
 Category: Romance
-ISBN: 978-2-12345-678-9
+ISBN: 9782123456789
 
 Title: Duis Aute Irure Dolor
 Author: Reprehenderit I. Voluptate
 Category: Mystery
-ISBN: 978-4-56789-012-3
+ISBN: 9784567890123
 
 Title: Velit Esse Cillum
 Author: Eu F. Fugiat
 Category: Historical Fiction
-ISBN: 978-5-67890-123-4
+ISBN: 9785678901234
 
 Title: Cupidatat Non Proident
 Author: Sunt I. Culpa
 Category: Biography
-ISBN: 978-6-78901-234-5
+ISBN: 9786789012345
 
 Title: Officia Deserunt Mollit
 Author: Anim E. Est
 Category: Horror
-ISBN: 978-7-89012-345-6
+ISBN: 9787890123456
 
 Title: Laborum Et Dolore
 Author: Fugiat N. Nulla
 Category: Poetry
-ISBN: 978-8-90123-456-7
+ISBN: 9788901234567
 **/
+
+
+
+    [Fact]
+    public void CreateANewBookTest() {
+
+        //Arrange
+
+
+        //Act
+        //    var caughtExecption = Assert.Throws<ArgumentException>(() => vehicle.Brand = maxLengthText);
+        Book book = new("Laborum Et Dolore", "Fugiat N. Nulla", "Poetry", "9788901234567");
+        //Assert
+        Assert.Equal("Title: Laborum Et Dolore " +
+            "Author: Fugiat N. Nulla" +
+            "Category: Poetry" +
+            "ISBN: 9788901234567", book.ToString());
+    }
 }

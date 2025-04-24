@@ -8,13 +8,11 @@
   </PropertyGroup>
 
   <ItemGroup>
-    <Folder Include="Book\" />
     <Folder Include="Repository\" />
   </ItemGroup>
 
   <ItemGroup>
     <ProjectReference Include="..\SmartBook.Extensions\SmartBook.Extensions.csproj" />
-    <ProjectReference Include="..\SmartBook.Tests\SmartBook.Tests.csproj" />
   </ItemGroup>
 
 </Project>
