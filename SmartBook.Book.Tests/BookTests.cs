@@ -91,4 +91,34 @@ public class BookTests
         //Assert
         Assert.Equal(expected, caughtExecption.Message);
     }
+
+    [Theory]
+    [InlineData("Laborum Et Dolore", "Fugiat N. Nulla", "Poetry", "978-8-901-23456-7")]
+    public void CreateANewBookThatIsValidISBN10(string title, string author, string category, string isbn) {
+
+        //Arrange
+        //Act
+        Book book = new(title, author, category, isbn);
+        //Assert
+        Assert.Equal($"Title: Laborum Et Dolore{Environment.NewLine}" +
+           $"Author: Fugiat N. Nulla{Environment.NewLine}" +
+           $"Category: Poetry{Environment.NewLine}" +
+           $"ISBN: 978-8-901-23456-7{Environment.NewLine}", book.ToString());
+
+    }
+
+    [Theory]
+    [InlineData("Laborum Et Dolore", "Fugiat N. Nulla", "Poetry", "0-8044-2957-X")]
+    public void CreateANewBookThatIsValidISBN13(string title, string author, string category, string isbn) {
+
+        //Arrange
+        //Act
+        Book book = new(title, author, category, isbn);
+        //Assert
+        Assert.Equal($"Title: Laborum Et Dolore{Environment.NewLine}" +
+           $"Author: Fugiat N. Nulla{Environment.NewLine}" +
+           $"Category: Poetry{Environment.NewLine}" +
+           $"ISBN: 0-8044-2957-X{Environment.NewLine}", book.ToString());
+
+    }
 }
