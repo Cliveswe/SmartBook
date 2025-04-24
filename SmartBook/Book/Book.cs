@@ -6,27 +6,36 @@ public class Book
 {
     private string title;
 
+    /// <summary>
+    /// Gets or sets the title of the book.
+    /// </summary>
     public string Title {
         get => title;
         private set => title = string.IsNullOrWhiteSpace(value.Trim()) ? throw new ArgumentException("Title cannot be empty!") : value;
     }
 
     private string author;
-
+    /// <summary>
+    /// Gets or sets the author of the book.
+    /// </summary>
     public string Author {
         get => author;
         private set => author = string.IsNullOrWhiteSpace(value.Trim()) ? throw new ArgumentException("Author cannot be empty!") : value;
     }
 
     private string category;
-
+    /// <summary>
+    /// Gets or sets the category of the book.
+    /// </summary>
     public string Category {
         get => category;
         private set => category = string.IsNullOrWhiteSpace(value.Trim()) ? throw new ArgumentException("Category cannot be empty!") : value;
     }
 
     private string isbn;
-
+    /// <summary>
+    /// Gets or sets the ISBN of the book.
+    /// </summary>
     public string ISBN {
         get => isbn;
         private set {
@@ -48,6 +57,13 @@ public class Book
             isbn = value;
         }
     }
+    /// <summary>
+    /// Constructor for the Book class.
+    /// </summary>
+    /// <param name="title"></param>
+    /// <param name="author"></param>
+    /// <param name="category"></param>
+    /// <param name="isbn"></param>
     public Book(string title, string author, string category, string isbn) {
         try {
 
@@ -60,7 +76,10 @@ public class Book
             throw;
         }
     }
-
+    /// <summary>
+    /// Overrides the ToString method to provide a string representation of the book.
+    /// </summary>
+    /// <returns></returns>
     public override string ToString() {
         StringBuilder sb = new();
         sb.Append($"Title: {Title}{Environment.NewLine}");
