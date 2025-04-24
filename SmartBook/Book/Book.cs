@@ -30,14 +30,18 @@ public class Book
     public string ISBN {
         get => isbn;
         private set {
+            // Check if the value is null or empty
             if(string.IsNullOrWhiteSpace(value.Trim()))
                 throw new ArgumentException("ISBN cannot be empty!");
 
+            // Check if the value contains only digits and possibly an 'X' at the end
             string cleaned = value.Replace("-", "");
 
+            // Check if the cleaned value contains only digits or an 'X' at the end if is no ISBN10
             if(cleaned.Any(char.IsLetter) && !(cleaned.EndsWith("X", StringComparison.OrdinalIgnoreCase) && cleaned.Length == 10))
                 throw new ArgumentException("ISBN must not contain letters, except possibly an 'X' at the end for ISBN-10.");
 
+            // Check if the cleaned value is between 10 and 13 characters long
             if(cleaned.Length < 10 || cleaned.Length > 13)
                 throw new ArgumentException("ISBN must be between 10 and 13 characters long!");
 
