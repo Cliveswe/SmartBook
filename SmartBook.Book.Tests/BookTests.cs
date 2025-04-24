@@ -78,6 +78,8 @@ public class BookTests
     [InlineData("Laborum Et Dolore", "", "Poetry", "9788901234567", "Author cannot be empty!")]
     [InlineData("Laborum Et Dolore", "Fugiat N. Nulla", "", "9788901234567", "Category cannot be empty!")]
     [InlineData("Laborum Et Dolore", "Fugiat N. Nulla", "Poetry", "", "ISBN cannot be empty!")]
+    [InlineData("Laborum Et Dolore", "Fugiat N. Nulla", "Poetry", "978890123456X", "ISBN must not contain letters, except possibly an 'X' at the end for ISBN-10.")]
+    [InlineData("Laborum Et Dolore", "Fugiat N. Nulla", "Poetry", "97889012345666", "ISBN must be between 10 and 13 characters long!")]
     [InlineData(" ", "Fugiat N. Nulla", "Poetry", "9788901234567", "Title cannot be empty!")]
     public void CreateANewBookWithMissingTitleTest(string title, string author, string category, string isbn, string expected) {
 

@@ -29,7 +29,20 @@ public class Book
 
     public string ISBN {
         get => isbn;
-        private set => isbn = string.IsNullOrWhiteSpace(value.Trim()) ? throw new ArgumentException("ISBN cannot be empty!") : value;
+        private set {
+            if(string.IsNullOrWhiteSpace(value.Trim()))
+                throw new ArgumentException("ISBN cannot be empty!");
+
+            string cleaned = value.Replace("-", "");
+
+            if(cleaned.Any(char.IsLetter) && !(cleaned.EndsWith("X", StringComparison.OrdinalIgnoreCase) && cleaned.Length == 10))
+                throw new ArgumentException("ISBN must not contain letters, except possibly an 'X' at the end for ISBN-10.");
+
+            if(cleaned.Length < 10 || cleaned.Length > 13)
+                throw new ArgumentException("ISBN must be between 10 and 13 characters long!");
+
+            isbn = value;
+        }
     }
     public Book(string title, string author, string category, string isbn) {
         try {
