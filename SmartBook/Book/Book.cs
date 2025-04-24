@@ -7,66 +7,45 @@ public class Book
     private string title;
 
     public string Title {
-        get {
-            return title;
-        }
-        private set {
+        get => title;
 
-            if(string.IsNullOrEmpty(value))
-                throw new ArgumentException("Title cannot be empty!");
-            else
-                title = value;
-        }
+        private set => title = string.IsNullOrEmpty(value) ? throw new ArgumentException("Title cannot be empty!") : value;
     }
 
     private string author;
 
     public string Author {
-        get {
-            return author;
-        }
-        private set {
-
-            if(string.IsNullOrEmpty(value))
-                throw new ArgumentException("Author cannot be empty!");
-            else
-                author = value;
-        }
+        get => author;
+        private set => author = string.IsNullOrEmpty(value) ? throw new ArgumentException("Author cannot be empty!") : value;
     }
 
     private string category;
 
     public string Category {
-        get {
-            return category;
-        }
-        private set {
-            if(string.IsNullOrEmpty(value))
-                throw new ArgumentException("Category cannot be empty!");
-            else
-                category = value;
-        }
+        get => category;
+
+        private set => category = string.IsNullOrEmpty(value) ? throw new ArgumentException("Category cannot be empty!") : value;
     }
 
 
     private string isbn;
 
     public string ISBN {
-        get {
-            return isbn;
-        }
-        private set {
-            if(string.IsNullOrEmpty(value))
-                throw new ArgumentException("ISBN cannot be empty!");
-            else
-                isbn = value;
-        }
+        get => isbn;
+
+        private set => isbn = string.IsNullOrEmpty(value) ? throw new ArgumentException("ISBN cannot be empty!") : value;
     }
     public Book(string title, string author, string category, string isbn) {
-        Title = title;
-        Author = author;
-        Category = category;
-        ISBN = isbn;
+        try {
+
+            Title = title;
+            Author = author;
+            Category = category;
+            ISBN = isbn;
+        } catch(ArgumentException) {
+
+            throw;
+        }
     }
 
     public override string ToString() {

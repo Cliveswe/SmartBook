@@ -63,7 +63,6 @@ public class BookTests
 
         //Arrange
 
-
         //Act
         //    var caughtExecption = Assert.Throws<ArgumentException>(() => vehicle.Brand = maxLengthText);
         Book book = new("Laborum Et Dolore", "Fugiat N. Nulla", "Poetry", "9788901234567");
@@ -72,5 +71,17 @@ public class BookTests
             $"Author: Fugiat N. Nulla{Environment.NewLine}" +
             $"Category: Poetry{Environment.NewLine}" +
             $"ISBN: 9788901234567{Environment.NewLine}", book.ToString());
+    }
+
+    [Fact]
+    public void CreateANewBookWithMissingTitleTest() {
+
+        //Arrange
+        // Book book = new("", "Fugiat N. Nulla", "Poetry", "9788901234567");
+        //Act
+        var caughtExecption = Assert.Throws<ArgumentException>(() => new Book("", "Fugiat N. Nulla", "Poetry", "9788901234567"));
+
+        //Assert
+        Assert.Equal("Title cannot be empty!", caughtExecption.Message);
     }
 }
