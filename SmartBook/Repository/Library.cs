@@ -1,10 +1,8 @@
-﻿using System.Collections;
-
-namespace SmartBook.Repository;
+﻿namespace SmartBook.Repository;
 /// <summary>
 /// Singleton class that represents a library.
 /// </summary>
-public class Library : IEnumerable<LibraryBook>
+public class Library
 {
     #region Properties
     private List<LibraryBook> books;
@@ -73,14 +71,6 @@ public class Library : IEnumerable<LibraryBook>
             throw new ArgumentNullException(nameof(book), "Book cannot be null.");
 
         books.Remove(book);
-    }
-
-    public IEnumerator<LibraryBook> GetEnumerator() {
-        return books.GetEnumerator();
-    }
-
-    IEnumerator IEnumerable.GetEnumerator() {
-        return GetEnumerator();
     }
 
     public void ClearLibrary() {
