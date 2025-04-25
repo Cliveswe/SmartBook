@@ -85,6 +85,15 @@ public class Library
         books.Remove(book);
     }
 
+    public void RemoveBookByISBN(string isbn) {
+        if(string.IsNullOrWhiteSpace(isbn))
+            throw new ArgumentNullException(nameof(isbn), "ISBN cannot be null or empty.");
+        LibraryBook? book = books.FirstOrDefault(b => b.ISBN == isbn);
+        if(book != null) {
+            RemoveBook(book);
+        }
+    }
+
     public void ClearLibrary() {
         if(Books.Count > 0) {
             books.Clear();
@@ -114,6 +123,7 @@ public class Library
 
         GetBook(book.Title, book.Author, out LibraryBook? findBook);
         findBook.BorrowLibraryBook();
+
 
     }
 
