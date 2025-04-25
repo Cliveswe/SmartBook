@@ -76,7 +76,7 @@ public class Library : IEnumerable<LibraryBook>
     }
 
     public IEnumerator<LibraryBook> GetEnumerator() {
-        throw new NotImplementedException();
+        return books.GetEnumerator();
     }
 
     IEnumerator IEnumerable.GetEnumerator() {
