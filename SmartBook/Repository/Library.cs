@@ -17,7 +17,7 @@ public class Library : IEnumerable<Book>
         private set => books = value;
     }
 
-    private static Library instance;
+    private static Library instance = new();
     /// <summary>
     /// Singleton instance of the Library class.
     /// </summary>
