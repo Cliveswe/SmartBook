@@ -106,4 +106,42 @@ ISBN: 978-1-56619-909-4
         Assert.Equal(expected, library.NumberOfBooks);
 
     }
+
+
+    [Theory]
+    [InlineData("Excepteur Sint Biography", "Cupidatat Non", "Biography", "978-1-56619-909-4", 1)]
+    public void AddOneLibraryBookToTheLibraryTest(string title, string author, string category, string isbn, int expected) {
+        //Arrange
+        Library library = Library.Instance;
+        library.ClearLibrary();
+        LibraryBook libraryBook = new(title, author, category, isbn);
+
+        //Act
+        library.AddBook(libraryBook);
+
+        //Assert
+        Assert.Equal(expected, library.NumberOfBooks);
+        Assert.False(libraryBook.OnLoan);
+        Assert.True(libraryBook.Available);
+    }
+
+
+    [Theory]
+    [InlineData("Excepteur Sint Biography", "Cupidatat Non", "Biography", "978-1-56619-909-4", 1)]
+    public void AddOneLibraryBookToTheLibraryThenBorrowItTest(string title, string author, string category, string isbn, int expected) {
+        //Arrange
+        Library library = Library.Instance;
+        library.ClearLibrary();
+        LibraryBook libraryBook = new(title, author, category, isbn);
+
+        //Act
+        library.AddBook(libraryBook);
+        libraryBook.BorrowLibraryBook();
+
+        //Assert
+        Assert.Equal(expected, library.NumberOfBooks);
+        Assert.True(libraryBook.OnLoan);
+        Assert.False(libraryBook.Available);
+
+    }
 }
