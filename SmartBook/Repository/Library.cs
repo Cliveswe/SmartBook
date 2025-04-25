@@ -59,7 +59,15 @@ public class Library
         books.Add(book);
     }
 
+    public IEnumerable<LibraryBook> GetBooksSortedByTitle() {
 
+        IOrderedEnumerable<LibraryBook> avaliableLibraryBooks = books
+            .Where(b => b.Available)
+            .OrderBy(b => b.Title);
+        var sortedBooks = avaliableLibraryBooks;
+
+        return sortedBooks;
+    }
 
     /// <summary>
     /// Removes a book from the library.

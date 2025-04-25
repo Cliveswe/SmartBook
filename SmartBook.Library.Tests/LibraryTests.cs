@@ -1,5 +1,4 @@
 ﻿using SmartBook.Repository;
-using SmartBook.Tests;
 
 namespace SmartBook;
 
@@ -58,8 +57,8 @@ Category: Biography
 ISBN: 978-1-56619-909-4
     **/
 
-    public List<Book> ListOfBooks() {
-        List<Book> books = new();
+    public List<LibraryBook> ListOfBooks() {
+        List<LibraryBook> books = new();
         books.Add(new("Lorem Ipsum Chronicles", "Dolor Sit", "Fiction", "978-0-123456-47-2"));
         books.Add(new("Adventures of Amet Elit", "Amet Elit", "Fantasy", "978-1-234567-89-7"));
         books.Add(new("Sed Do Temporalis", "Incididunt Ut", "Science Fiction", "978-0-321-56789-0"));
@@ -81,7 +80,7 @@ ISBN: 978-1-56619-909-4
         Library library = Library.Instance;
         library.ClearLibrary();
         //Act
-        List<Book> books = ListOfBooks();
+        List<LibraryBook> books = ListOfBooks();
         foreach(var book in books) {
             library.AddBook(book);
         }
@@ -96,7 +95,7 @@ ISBN: 978-1-56619-909-4
         //Arrange
         Library library = Library.Instance;
         library.ClearLibrary();
-        Book book = new(title, author, category, isbn);
+        LibraryBook book = new(title, author, category, isbn);
 
         //Act
         library.AddBook(book);
