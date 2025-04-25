@@ -1,18 +1,17 @@
-﻿using SmartBook.Tests;
-using System.Collections;
+﻿using System.Collections;
 
 namespace SmartBook.Repository;
 /// <summary>
 /// Singleton class that represents a library.
 /// </summary>
-public class Library : IEnumerable<Book>
+public class Library : IEnumerable<LibraryBook>
 {
-
-    private List<Book> books;
+    #region Properties
+    private List<LibraryBook> books;
     /// <summary>
     /// Gets or sets the list of books in the library.
     /// </summary>
-    public List<Book> Books {
+    public List<LibraryBook> Books {
         get => books;
         private set => books = value;
     }
@@ -39,12 +38,13 @@ public class Library : IEnumerable<Book>
             return books.Count;
         }
     }
+    #endregion
 
     /// <summary>
     /// Private constructor to prevent instantiation from outside the class.
     /// </summary>
     private Library() {
-        books = new List<Book>();
+        books = new List<LibraryBook>();
 
     }
 
@@ -53,7 +53,7 @@ public class Library : IEnumerable<Book>
     /// </summary>
     /// <param name="book"></param>
     /// <exception cref="ArgumentNullException"></exception>
-    public void AddBook(Book book) {
+    public void AddBook(LibraryBook book) {
 
         if(book == null)
             throw new ArgumentNullException(nameof(book), "Book cannot be null.");
@@ -61,19 +61,21 @@ public class Library : IEnumerable<Book>
         books.Add(book);
     }
 
+
+
     /// <summary>
     /// Removes a book from the library.
     /// </summary>
     /// <param name="book"></param>
     /// <exception cref="ArgumentNullException"></exception>
-    public void RemoveBook(Book book) {
+    public void RemoveBook(LibraryBook book) {
         if(book == null)
             throw new ArgumentNullException(nameof(book), "Book cannot be null.");
 
         books.Remove(book);
     }
 
-    public IEnumerator<Book> GetEnumerator() {
+    public IEnumerator<LibraryBook> GetEnumerator() {
         throw new NotImplementedException();
     }
 
