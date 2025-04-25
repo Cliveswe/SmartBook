@@ -105,4 +105,16 @@ public class Library
         return true;
 
     }
+
+    public void BorrowBook(LibraryBook book) {
+        if(book == null)
+            throw new ArgumentNullException(nameof(book), "Book cannot be null.");
+        if(!book.BorrowLibraryBook())
+            throw new InvalidOperationException("Book is not available for borrowing.");
+
+        GetBook(book.Title, book.Author, out LibraryBook? findBook);
+        findBook.BorrowLibraryBook();
+
+    }
+
 }
