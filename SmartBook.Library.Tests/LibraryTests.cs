@@ -79,11 +79,10 @@ ISBN: 978-1-56619-909-4
         //Arrange
         Library library = Library.Instance;
         library.ClearLibrary();
+
         //Act
         List<LibraryBook> books = ListOfBooks();
-        foreach(var book in books) {
-            library.AddBook(book);
-        }
+        PopulateLibrary(ref library);
 
         //Assert
         Assert.Equal(books.Count, library.NumberOfBooks);
@@ -144,6 +143,16 @@ ISBN: 978-1-56619-909-4
 
     }
 
+    private void PopulateLibrary(ref Library library) {
+        //Populate the library with books
+        List<LibraryBook> books = ListOfBooks();
+        //Add the books to the library
+        foreach(var book in books) {
+            library.AddBook(book);
+        }
+
+    }
+
     [Fact]
     public void CreateANewLibraryShowAvailableBooksSortedByTitleTest() {
         //Arrange
@@ -151,10 +160,8 @@ ISBN: 978-1-56619-909-4
         library.ClearLibrary();
 
         //Act
-        List<LibraryBook> books = ListOfBooks();
-        foreach(var book in books) {
-            library.AddBook(book);
-        }
+        PopulateLibrary(ref library);
+        //Create a list of available books
         IOrderedEnumerable<LibraryBook> listOfBooks = ListOfBooks()
             .Where(b => b.Available)
             .OrderBy(b => b.Title);
@@ -171,10 +178,7 @@ ISBN: 978-1-56619-909-4
         library.ClearLibrary();
 
         //Act
-        List<LibraryBook> books = ListOfBooks();
-        foreach(var book in books) {
-            library.AddBook(book);
-        }
+        PopulateLibrary(ref library);
         IOrderedEnumerable<LibraryBook> listOfBooks = ListOfBooks()
             .OrderBy(b => b.Title);
         var libraryResult = library.GetAllBooksSortedByTitle();
@@ -194,11 +198,7 @@ ISBN: 978-1-56619-909-4
         LibraryBook expectedBook = new(title, author, category, isbn);
 
         //Act
-        List<LibraryBook> books = ListOfBooks();
-        foreach(var book in books) {
-            library.AddBook(book);
-        }
-
+        PopulateLibrary(ref library);
         LibraryBook? foundBook;
         bool result = library.GetBook(title, author, out foundBook);
 
@@ -219,10 +219,7 @@ ISBN: 978-1-56619-909-4
         expectedBook.BorrowLibraryBook();
 
         //Act
-        List<LibraryBook> books = ListOfBooks();
-        foreach(var book in books) {
-            library.AddBook(book);
-        }
+        PopulateLibrary(ref library);
 
         //Search for the book
         library.BorrowBook(libraryBook);
@@ -245,9 +242,7 @@ ISBN: 978-1-56619-909-4
 
         //Act
         List<LibraryBook> books = ListOfBooks();
-        foreach(var book in books) {
-            library.AddBook(book);
-        }
+        PopulateLibrary(ref library);
         library.RemoveBookByISBN(isbn);
 
         //Assert
@@ -266,9 +261,7 @@ ISBN: 978-1-56619-909-4
 
         //Act
         List<LibraryBook> books = ListOfBooks();
-        foreach(var book in books) {
-            library.AddBook(book);
-        }
+        PopulateLibrary(ref library);
         library.RemoveBookByTitle(title);
 
         //Assert
