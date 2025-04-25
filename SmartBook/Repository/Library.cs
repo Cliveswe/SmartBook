@@ -59,14 +59,12 @@ public class Library
         books.Add(book);
     }
 
-    public IEnumerable<LibraryBook> GetBooksSortedByTitle() {
+    public List<LibraryBook> GetBooksSortedByTitle() {
 
-        IOrderedEnumerable<LibraryBook> avaliableLibraryBooks = books
-            .Where(b => b.Available)
-            .OrderBy(b => b.Title);
-        var sortedBooks = avaliableLibraryBooks;
+        return (List<LibraryBook>)books
+             .Where(b => b.Available)
+             .OrderBy(b => b.Title).ToList();
 
-        return sortedBooks;
     }
 
     /// <summary>

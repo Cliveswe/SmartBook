@@ -144,5 +144,24 @@ ISBN: 978-1-56619-909-4
 
     }
 
+    [Fact]
+    public void CreateANewLibraryShowAvailableBooksSortedByTitleTest() {
+        //Arrange
+        Library library = Library.Instance;
+        library.ClearLibrary();
+        //Act
+        List<LibraryBook> books = ListOfBooks();
+        foreach(var book in books) {
+            library.AddBook(book);
+        }
+        IOrderedEnumerable<LibraryBook> listOfBooks = ListOfBooks()
+            .Where(b => b.Available)
+            .OrderBy(b => b.Title);
+        var libraryResult = library.GetBooksSortedByTitle();
+
+        //Assert
+        Assert.Equal(listOfBooks, libraryResult);
+    }
+
 
 }

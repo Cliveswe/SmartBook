@@ -31,4 +31,18 @@ public class LibraryBook : Book
             return false;
         }
     }
+
+    public override bool Equals(object? obj) {
+        if(obj is LibraryBook other) {
+            return Title == other.Title &&
+                   Author == other.Author &&
+                   Category == other.Category &&
+                   ISBN == other.ISBN;
+        }
+        return false;
+    }
+
+    public override int GetHashCode() {
+        return HashCode.Combine(Title, Author, Category, ISBN);
+    }
 }
