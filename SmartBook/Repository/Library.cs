@@ -59,7 +59,13 @@ public class Library
         books.Add(book);
     }
 
-    public List<LibraryBook> GetBooksSortedByTitle() {
+    public List<LibraryBook> GetAllBooksSortedByTitle() {
+
+        return (List<LibraryBook>)books
+             .OrderBy(b => b.Title).ToList();
+    }
+
+    public List<LibraryBook> GetAllAvailableBooksSortedByTitle() {
 
         return (List<LibraryBook>)books
              .Where(b => b.Available)
@@ -83,5 +89,20 @@ public class Library
         if(Books.Count > 0) {
             books.Clear();
         }
+    }
+
+    public bool GetBooks(string title, string author, out LibraryBook? findBook) {
+
+        if(string.IsNullOrWhiteSpace(title) || string.IsNullOrWhiteSpace(author))
+            throw new ArgumentNullException("Title and author cannot be null or empty.");
+
+        findBook = books
+               .Where(b => b.Title == title && b.Author == author).FirstOrDefault();
+
+        if(findBook == null)
+            return false;
+
+        return true;
+
     }
 }

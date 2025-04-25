@@ -157,11 +157,52 @@ ISBN: 978-1-56619-909-4
         IOrderedEnumerable<LibraryBook> listOfBooks = ListOfBooks()
             .Where(b => b.Available)
             .OrderBy(b => b.Title);
-        var libraryResult = library.GetBooksSortedByTitle();
+        var libraryResult = library.GetAllAvailableBooksSortedByTitle();
 
         //Assert
         Assert.Equal(listOfBooks, libraryResult);
     }
 
+    [Fact]
+    public void CreateANewLibraryShowAllBooksSortedByTitleTest() {
+        //Arrange
+        Library library = Library.Instance;
+        library.ClearLibrary();
+        //Act
+        List<LibraryBook> books = ListOfBooks();
+        foreach(var book in books) {
+            library.AddBook(book);
+        }
+        IOrderedEnumerable<LibraryBook> listOfBooks = ListOfBooks()
+            .OrderBy(b => b.Title);
+        var libraryResult = library.GetAllBooksSortedByTitle();
+
+        //Assert
+        Assert.Equal(listOfBooks, libraryResult);
+    }
+
+
+    [Theory]
+    [InlineData("Excepteur Sint Biography", "Cupidatat Non", "Biography", "978-1-56619-909-4")]
+    public void SearchForABookByAuthorAndTitleTest(string title, string author, string category, string isbn) {
+        //Arrange
+        Library library = Library.Instance;
+        library.ClearLibrary();
+        LibraryBook libraryBook = new(title, author, category, isbn);
+        LibraryBook expectedBook = new(title, author, category, isbn);
+
+        //Act
+        List<LibraryBook> books = ListOfBooks();
+        foreach(var book in books) {
+            library.AddBook(book);
+        }
+
+        LibraryBook? foundBook;
+        bool result = library.GetBooks(title, author, out foundBook);
+
+        //Assert
+        Assert.Equal(expectedBook, foundBook);
+
+    }
 
 }
