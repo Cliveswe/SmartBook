@@ -32,6 +32,11 @@ public class LibraryBook : Book
         }
     }
 
+    /// <summary>
+    /// Returning a library book.
+    /// </summary>
+    /// <param name="obj"></param>
+    /// <returns>False if the obj is not equal to this instance.</returns>
     public override bool Equals(object? obj) {
         if(obj is LibraryBook other) {
             return Title == other.Title &&
@@ -42,6 +47,10 @@ public class LibraryBook : Book
         return false;
     }
 
+    /// <summary>
+    /// Overrides the GetHashCode method to provide a hash code for the book.
+    /// </summary>
+    /// <returns>HashCode of Title, Author, Category and ISBN</returns>
     public override int GetHashCode() {
         return HashCode.Combine(Title, Author, Category, ISBN);
     }
