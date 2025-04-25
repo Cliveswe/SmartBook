@@ -149,6 +149,7 @@ ISBN: 978-1-56619-909-4
         //Arrange
         Library library = Library.Instance;
         library.ClearLibrary();
+
         //Act
         List<LibraryBook> books = ListOfBooks();
         foreach(var book in books) {
@@ -168,6 +169,7 @@ ISBN: 978-1-56619-909-4
         //Arrange
         Library library = Library.Instance;
         library.ClearLibrary();
+
         //Act
         List<LibraryBook> books = ListOfBooks();
         foreach(var book in books) {
@@ -198,7 +200,7 @@ ISBN: 978-1-56619-909-4
         }
 
         LibraryBook? foundBook;
-        bool result = library.GetBooks(title, author, out foundBook);
+        bool result = library.GetBook(title, author, out foundBook);
 
         //Assert
         Assert.Equal(expectedBook, foundBook);

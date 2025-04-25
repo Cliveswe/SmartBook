@@ -91,7 +91,7 @@ public class Library
         }
     }
 
-    public bool GetBooks(string title, string author, out LibraryBook? findBook) {
+    public bool GetBook(string title, string author, out LibraryBook? findBook) {
 
         if(string.IsNullOrWhiteSpace(title) || string.IsNullOrWhiteSpace(author))
             throw new ArgumentNullException("Title and author cannot be null or empty.");
