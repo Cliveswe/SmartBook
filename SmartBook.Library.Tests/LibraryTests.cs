@@ -248,8 +248,31 @@ ISBN: 978-1-56619-909-4
         foreach(var book in books) {
             library.AddBook(book);
         }
-        library.
+        library.RemoveBookByISBN(isbn);
 
         //Assert
+        Assert.Equal(books.Count - 1, library.NumberOfBooks);
+        Assert.False(library.Books.Contains(targetBook));
+    }
+
+    [Theory]
+    [InlineData("Excepteur Sint Biography", "Cupidatat Non", "Biography", "978-1-56619-909-4")]
+    public void RemoveBookByTitle(string title, string author, string category, string isbn) {
+
+        //Arrange
+        Library library = Library.Instance;
+        library.ClearLibrary();
+        LibraryBook targetBook = new(title, author, category, isbn);
+
+        //Act
+        List<LibraryBook> books = ListOfBooks();
+        foreach(var book in books) {
+            library.AddBook(book);
+        }
+        library.RemoveBookByTitle(title);
+
+        //Assert
+        Assert.Equal(books.Count - 1, library.NumberOfBooks);
+        Assert.False(library.Books.Contains(targetBook));
     }
 }
