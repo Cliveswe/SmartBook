@@ -62,7 +62,6 @@ ISBN: 978-1-56619-909-4
         books.Add(new("Lorem Ipsum Chronicles", "Dolor Sit", "Fiction", "978-0-123456-47-2"));
         books.Add(new("Adventures of Amet Elit", "Amet Elit", "Fantasy", "978-1-234567-89-7"));
         books.Add(new("Sed Do Temporalis", "Incididunt Ut", "Science Fiction", "978-0-321-56789-0"));
-        books.Add(new("Sed Do Temporalis", "Incididunt Ut", "Science Fiction", "978-0-321-56789-0"));
         books.Add(new("Labore et Dolore: A Mystery", "Magna Aliqua", "Mystery", "978-3-16-148410-0"));
         books.Add(new("Ut Enim Veniam", "Quis Nostrud", "Romance", "978-0-262-13472-9"));
         books.Add(new("Exercitationem: The Escape", "Laboris Nisi", "Thriller", "978-1-4028-9462-6"));
@@ -261,7 +260,7 @@ ISBN: 978-1-56619-909-4
         //Act
         List<LibraryBook> books = ListOfBooks();
         PopulateLibrary(ref library);
-        library.RemoveBookByTitle(title);
+        library.RemoveBookByTitle(targetBook.Title);
 
         //Assert
         Assert.Equal(books.Count - 1, library.NumberOfBooks);
