@@ -68,7 +68,7 @@ public class Library
     public List<LibraryBook> GetAllAvailableBooksSortedByTitle() {
 
         return (List<LibraryBook>)books
-             .Where(b => b.Available)
+             .Where(b => b.IsAvailable)
              .OrderBy(b => b.Title).ToList();
 
     }

@@ -119,8 +119,7 @@ ISBN: 978-1-56619-909-4
 
         //Assert
         Assert.Equal(expected, library.NumberOfBooks);
-        Assert.False(libraryBook.OnLoan);
-        Assert.True(libraryBook.Available);
+        Assert.True(libraryBook.IsAvailable);
     }
 
 
@@ -138,8 +137,7 @@ ISBN: 978-1-56619-909-4
 
         //Assert
         Assert.Equal(expected, library.NumberOfBooks);
-        Assert.True(libraryBook.OnLoan);
-        Assert.False(libraryBook.Available);
+        Assert.False(libraryBook.IsAvailable);
 
     }
 
@@ -163,7 +161,7 @@ ISBN: 978-1-56619-909-4
         PopulateLibrary(ref library);
         //Create a list of available books
         IOrderedEnumerable<LibraryBook> listOfBooks = ListOfBooks()
-            .Where(b => b.Available)
+            .Where(b => b.IsAvailable)
             .OrderBy(b => b.Title);
         var libraryResult = library.GetAllAvailableBooksSortedByTitle();
 
@@ -226,9 +224,7 @@ ISBN: 978-1-56619-909-4
 
         //Assert
         Assert.Equal(expectedBook, libraryBook);
-        Assert.True(libraryBook?.OnLoan);
-        Assert.True(expectedBook?.OnLoan);
-
+        Assert.True(libraryBook?.IsAvailable);
     }
 
     [Theory]

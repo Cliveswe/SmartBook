@@ -4,13 +4,13 @@ namespace SmartBook;
 
 public class LibraryBook : Book
 {
-    private bool IsAvailable {
+    public bool IsAvailable {
         get;
-        set;
+        private set;
     }
 
-    public bool OnLoan => !IsAvailable;
-    public bool Available => IsAvailable;
+    //public bool OnLoan => !IsAvailable;
+    //public bool Available => IsAvailable;
 
     public LibraryBook(string title, string author, string category, string isbn)
         : base(title, author, category, isbn) {
@@ -56,6 +56,6 @@ public class LibraryBook : Book
     }
 
     public override string ToString() {
-        return $"{base.ToString()}Available: {(Available ? "Yes" : "No")}";
+        return $"{base.ToString()}Available: {(IsAvailable ? "Yes" : "No")}";
     }
 }
