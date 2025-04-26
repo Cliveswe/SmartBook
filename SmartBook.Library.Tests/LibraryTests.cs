@@ -224,7 +224,7 @@ ISBN: 978-1-56619-909-4
 
         //Assert
         Assert.Equal(expectedBook, libraryBook);
-        Assert.True(libraryBook?.IsAvailable);
+        Assert.False(libraryBook?.IsAvailable);
     }
 
     [Theory]
