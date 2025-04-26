@@ -54,4 +54,8 @@ public class LibraryBook : Book
     public override int GetHashCode() {
         return HashCode.Combine(Title, Author, Category, ISBN);
     }
+
+    public override string ToString() {
+        return $"{base.ToString()}Available: {(Available ? "Yes" : "No")}";
+    }
 }
