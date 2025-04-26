@@ -46,6 +46,11 @@ public class Library
 
     }
 
+    private LibraryBook? FindBookByISBN(string isbn) {
+
+        return Books.FirstOrDefault(book => book.ISBN == isbn);
+    }
+
     /// <summary>
     /// Adds a book to the library.
     /// </summary>
@@ -55,6 +60,9 @@ public class Library
 
         if(book == null)
             throw new ArgumentNullException(nameof(book), "Book cannot be null.");
+
+        if(FindBookByISBN(book.ISBN) != null)
+            throw new ArgumentException($"Book with the same {book.ISBN} already exists in the library.");
 
         Books.Add(book);
     }

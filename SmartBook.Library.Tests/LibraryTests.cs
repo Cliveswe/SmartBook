@@ -211,16 +211,19 @@ ISBN: 978-1-56619-909-4
         //Arrange
         Library library = Library.Instance;
         library.ClearLibrary();
-        LibraryBook libraryBook = new(title, author, category, isbn);
         LibraryBook expectedBook = new(title, author, category, isbn);
-        //Mark the book as borrowed
         expectedBook.BorrowLibraryBook();
 
         //Act
         PopulateLibrary(ref library);
 
         //Search for the book
-        library.BorrowBook(libraryBook);
+        bool bookFound = library.GetBook(title, author, out LibraryBook? libraryBook);
+
+        // Ensure the book is found before borrowing
+        if(bookFound && libraryBook != null) {
+            library.BorrowBook(libraryBook);
+        }
 
         //Assert
         Assert.Equal(expectedBook, libraryBook);
@@ -275,9 +278,10 @@ ISBN: 978-1-56619-909-4
 
         //Act
         library.AddBook(book1);
-        library.AddBook(book2);
+        //library.AddBook(book2);
 
         //Assert
-        Assert.NotEqual(2, library.NumberOfBooks);
+        //Assert.NotEqual(2, library.NumberOfBooks);
+        Assert.Throws<ArgumentException>(() => library.AddBook(book2));
     }
 }
