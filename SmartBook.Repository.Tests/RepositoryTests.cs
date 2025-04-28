@@ -1,10 +1,10 @@
 ﻿namespace SmartBook.Repository.Tests;
 
-public class UnitTest1
+public class RepositoryTests
 {
     private readonly DirectoryInfo directoryInformationPath = new DirectoryInfo(@"..\..\..\..\Smartbook\Repository");
     [Fact]
-    public void Test1() {
+    public void CheckThatTheRepositoryJSONIsInTheCorrectDirectoryTest() {
 
         var y = directoryInformationPath.GetFiles();
         Assert.NotNull(y);

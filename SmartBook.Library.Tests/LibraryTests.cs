@@ -56,6 +56,7 @@ Category: Biography
 ISBN: 978-1-56619-909-4
     **/
 
+    private Library library = Library.Instance;
     public static List<LibraryBook> ListOfBooks {
         get {
             List<LibraryBook> books =
@@ -79,7 +80,6 @@ ISBN: 978-1-56619-909-4
     [Fact]
     public void CreateANewLibraryTest() {
         //Arrange
-        Library library = Library.Instance;
         library.ClearLibrary();
 
         //Act
@@ -94,7 +94,6 @@ ISBN: 978-1-56619-909-4
     [InlineData("Excepteur Sint Biography", "Cupidatat Non", "Biography", "978-1-56619-909-4", 1)]
     public void AddOneBookToTheLibraryTest(string title, string author, string category, string isbn, int expected) {
         //Arrange
-        Library library = Library.Instance;
         library.ClearLibrary();
         LibraryBook book = new(title, author, category, isbn);
 
@@ -112,7 +111,6 @@ ISBN: 978-1-56619-909-4
     [InlineData("Excepteur Sint Biography", "Cupidatat Non", "Biography", "978-1-56619-909-4", 1)]
     public void AddOneLibraryBookToTheLibraryTest(string title, string author, string category, string isbn, int expected) {
         //Arrange
-        Library library = Library.Instance;
         library.ClearLibrary();
         LibraryBook libraryBook = new(title, author, category, isbn);
 
@@ -129,7 +127,6 @@ ISBN: 978-1-56619-909-4
     [InlineData("Excepteur Sint Biography", "Cupidatat Non", "Biography", "978-1-56619-909-4", 1)]
     public void AddOneLibraryBookToTheLibraryThenBorrowItTest(string title, string author, string category, string isbn, int expected) {
         //Arrange
-        Library library = Library.Instance;
         library.ClearLibrary();
         LibraryBook libraryBook = new(title, author, category, isbn);
 
@@ -156,7 +153,6 @@ ISBN: 978-1-56619-909-4
     [Fact]
     public void CreateANewLibraryShowAvailableBooksSortedByTitleTest() {
         //Arrange
-        Library library = Library.Instance;
         library.ClearLibrary();
 
         //Act
@@ -174,7 +170,6 @@ ISBN: 978-1-56619-909-4
     [Fact]
     public void CreateANewLibraryShowAllBooksSortedByTitleTest() {
         //Arrange
-        Library library = Library.Instance;
         library.ClearLibrary();
 
         //Act
@@ -192,7 +187,6 @@ ISBN: 978-1-56619-909-4
     [InlineData("Excepteur Sint Biography", "Cupidatat Non", "Biography", "978-1-56619-909-4")]
     public void SearchForABookByAuthorAndTitleTest(string title, string author, string category, string isbn) {
         //Arrange
-        Library library = Library.Instance;
         library.ClearLibrary();
         LibraryBook expectedBook = new(title, author, category, isbn);
 
@@ -209,7 +203,6 @@ ISBN: 978-1-56619-909-4
     [InlineData("Excepteur Sint Biography", "Cupidatat Non", "Biography", "978-1-56619-909-4")]
     public void SearchForABookByAuthorAndTitleMarkItAsBorrowedTest(string title, string author, string category, string isbn) {
         //Arrange
-        Library library = Library.Instance;
         library.ClearLibrary();
         LibraryBook expectedBook = new(title, author, category, isbn);
         expectedBook.BorrowLibraryBook();
@@ -235,7 +228,6 @@ ISBN: 978-1-56619-909-4
     public void RemoveBookByISBN(string title, string author, string category, string isbn) {
 
         //Arrange
-        Library library = Library.Instance;
         library.ClearLibrary();
         LibraryBook targetBook = new(title, author, category, isbn);
 
@@ -254,7 +246,6 @@ ISBN: 978-1-56619-909-4
     public void RemoveBookByTitle(string title, string author, string category, string isbn) {
 
         //Arrange
-        Library library = Library.Instance;
         library.ClearLibrary();
         LibraryBook targetBook = new(title, author, category, isbn);
 
@@ -271,7 +262,6 @@ ISBN: 978-1-56619-909-4
     [Fact]
     public void AddTwoIdenticalBooksToTheLibraryTest() {
         //Arrange
-        Library library = Library.Instance;
         library.ClearLibrary();
         LibraryBook book1 = new("Excepteur Sint Biography", "Cupidatat Non", "Biography", "978-1-56619-909-4");
         LibraryBook book2 = new("Excepteur Sint Biography", "Cupidatat Non", "Biography", "978-1-56619-909-4");
