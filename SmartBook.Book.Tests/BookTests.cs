@@ -1,7 +1,4 @@
-﻿using SmartBook.Tests;
-
-namespace SmartBook;
-
+﻿namespace SmartBook.Tests;
 public class BookTests
 {
     [Fact]

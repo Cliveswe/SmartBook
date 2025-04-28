@@ -14,7 +14,8 @@ public class Library
         private set => books = value;
     }
 
-    private static Library instance = new();
+    private static readonly Library instance = new();
+
     /// <summary>
     /// Singleton instance of the Library class.
     /// </summary>
@@ -29,20 +30,13 @@ public class Library
     /// <summary>
     /// Gets the number of books in the library.
     /// </summary>
-    public int NumberOfBooks {
-        get {
-            return books.Count;
-        }
-    }
+    public int NumberOfBooks => books.Count;
     #endregion
 
     /// <summary>
     /// Private constructor to prevent instantiation from outside the class.
     /// </summary>
-    private Library() {
-        books = new List<LibraryBook>();
-
-    }
+    private Library() => books = [];
 
     private LibraryBook? FindBookByISBN(string isbn) {
 
@@ -67,15 +61,14 @@ public class Library
 
     public List<LibraryBook> GetAllBooksSortedByTitle() {
 
-        return (List<LibraryBook>)books
-             .OrderBy(b => b.Title).ToList();
+        return (List<LibraryBook>)[.. books.OrderBy(b => b.Title)];
     }
 
     public List<LibraryBook> GetAllAvailableBooksSortedByTitle() {
 
-        return (List<LibraryBook>)books
+        return (List<LibraryBook>)[.. books
              .Where(b => b.IsAvailable)
-             .OrderBy(b => b.Title).ToList();
+             .OrderBy(b => b.Title)];
 
     }
 
@@ -127,7 +120,6 @@ public class Library
             return false;
 
         return true;
-
     }
 
     public void BorrowBook(LibraryBook book) {
