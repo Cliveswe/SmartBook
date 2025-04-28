@@ -138,10 +138,12 @@ public class Library
         if(!book.BorrowLibraryBook())
             throw new InvalidOperationException("Book is not available for borrowing.");
 
-        GetBook(book.Title, book.Author, out LibraryBook? findBook);
-        findBook.BorrowLibraryBook();
-
-
+        if(GetBook(book.Title, book.Author, out LibraryBook? findBook) && findBook != null) {
+            findBook.BorrowLibraryBook();
+        }
+        else {
+            throw new InvalidOperationException("The specified book could not be found in the library.");
+        }
     }
 
 }
