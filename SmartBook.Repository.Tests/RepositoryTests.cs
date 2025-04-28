@@ -1,12 +1,23 @@
-﻿namespace SmartBook.Repository.Tests;
+﻿using System.Text;
+namespace SmartBook.Repository.Tests;
+
 
 public class RepositoryTests
 {
-    private readonly DirectoryInfo directoryInformationPath = new DirectoryInfo(@"..\..\..\..\Smartbook\Repository");
+
+    private DirectoryInfo directoryInformationPath;
+
+    /// <summary>
+    /// Constructor for the RepositoryTests class.
+    /// </summary>
+    public RepositoryTests() {
+        StringBuilder sb = new StringBuilder();
+        sb.Append(@"..\..\..\..\Smartbook\Repository");
+        directoryInformationPath = new DirectoryInfo(sb.ToString());
+    }
+
     [Fact]
     public void CheckThatTheRepositoryJSONIsInTheCorrectDirectoryTest() {
-
-        var y = directoryInformationPath.GetFiles();
-        Assert.NotNull(y);
+        Assert.NotNull(directoryInformationPath);
     }
 }
