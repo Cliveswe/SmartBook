@@ -20,11 +20,9 @@ public class Library
     /// </summary>
     public static Library Instance {
         get {
-
-            if(instance == null)
-                instance = new Library();
-
-            return instance;
+            if(instance != null)
+                return instance;
+            return new Library();
         }
     }
 
