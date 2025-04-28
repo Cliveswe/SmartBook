@@ -245,7 +245,7 @@ ISBN: 978-1-56619-909-4
 
         //Assert
         Assert.Equal(books.Count - 1, library.NumberOfBooks);
-        Assert.False(library.Books.Contains(targetBook));
+        Assert.DoesNotContain(targetBook, library.Books);
     }
 
     [Theory]
@@ -264,7 +264,7 @@ ISBN: 978-1-56619-909-4
 
         //Assert
         Assert.Equal(books.Count - 1, library.NumberOfBooks);
-        Assert.False(library.Books.Contains(targetBook));
+        Assert.DoesNotContain(targetBook, library.Books);
     }
 
     [Fact]
