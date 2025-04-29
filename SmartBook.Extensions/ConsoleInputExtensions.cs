@@ -1,9 +1,10 @@
-﻿namespace SmartBook.Extensions;
+﻿
+namespace SmartBook;
 
 public static class ConsoleInputExtensions
 {
 
-    public static string GetBookDetails(string header) {
+    public static string GetBookDetails(this string header) {
         string? details = string.Empty;
 
         do {
@@ -42,5 +43,31 @@ public static class ConsoleInputExtensions
 
         } while(!int.TryParse(Console.ReadLine(), out isbn));
 
+    }
+
+    public static void DisplayErrorMessage(this string message) {
+        Console.ForegroundColor = ConsoleColor.Red;
+        Console.WriteLine(message);
+        Console.ResetColor();
+    }
+
+
+    public static void DisplaySuccessMessage(this string message) {
+        Console.ForegroundColor = ConsoleColor.Green;
+        Console.WriteLine(message);
+        Console.ResetColor();
+    }
+    public static void DisplayWarningMessage(this string message) {
+        Console.ForegroundColor = ConsoleColor.Yellow;
+        Console.WriteLine(message);
+        Console.ResetColor();
+    }
+    public static void DisplayInfoMessage(this string message) {
+        Console.ForegroundColor = ConsoleColor.Cyan;
+        Console.WriteLine(message);
+        Console.ResetColor();
+    }
+    public static void DisplayStandardMessage(this string message) {
+        Console.WriteLine(message);
     }
 }
