@@ -69,8 +69,6 @@ public class LibraryTests
 
     }
 
-
-
     [Fact]
     public void CreateANewLibraryShowAvailableBooksSortedByTitleTest() {
         //Arrange

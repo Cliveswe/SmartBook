@@ -24,6 +24,7 @@ public class JSONRepository
     }
     public void SaveToFile(List<LibraryBook> data) {
         ArgumentNullException.ThrowIfNull(data);
+
         string jsonData = JsonSerializer.Serialize(data);
         File.WriteAllText(Path.Combine(filePath, fileName + fileExtension), jsonData);
     }
@@ -37,5 +38,12 @@ public class JSONRepository
             }
         }
         throw new FileNotFoundException("File not found or empty.", Path.Combine(filePath, fileName + fileExtension));
+    }
+
+    public void DeleteFile() {
+        // Remove the file if it exists
+        if(File.Exists(Path.Combine(filePath, fileName + fileExtension))) {
+            File.Delete(Path.Combine(filePath, fileName + fileExtension));
+        }
     }
 }
