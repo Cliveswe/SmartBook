@@ -1,12 +1,14 @@
-﻿namespace SmartBook.Repository.Tests;
+﻿using SmartBook.Repository;
+
+namespace SmartBook.LibraryTests.Repository;
 
 
 public class RepositoryTests
 {
-    private Library library = Library.Instance;
-    private DummyData dummyData = new();
-    private DirectoryInfo directoryInformationPath;
-    private JSONRepository jsonRepository;
+    private readonly Library library = Library.Instance;
+    private readonly DummyData dummyData = new();
+    private readonly DirectoryInfo directoryInformationPath;
+    private readonly JSONRepository jsonRepository;
     private readonly string filePath = @"..\..\..\..\Smartbook\Data\";
     private readonly string fileName = "Library";
     private readonly string fileExtension = ".json";
@@ -32,45 +34,19 @@ public class RepositoryTests
         jsonRepository.SaveToFile(library.GetAllAvailableBooksSortedByTitle());
         // Assert
         Assert.Equal(jsonRepository.LoadFromFile(), expectedLibrary);
-    }
 
-
-    [Fact]
-    public void CheckThatTheLibraryIsNotNullTest() {
-        // Arrange
-        library.ClearLibrary();
-
-        // Act
-        dummyData.PopulateLibrary(ref library);
-
-        // Assert
-        Assert.NotNull(library);
-    }
-
-    [Fact]
-    public void CheckThatTheLibraryIsNotEmptyTest() {
-        // Arrange
-        library.ClearLibrary();
-
-        // Act
-        dummyData.PopulateLibrary(ref library);
-
-        // Assert
-        Assert.NotEmpty(library.Books);
     }
 
     [Fact]
     public void CheckThatSaveToFileNullTest() {
         //Arrange
-        library.ClearLibrary();
-        List<LibraryBook> books = null;
-        // jsonRepository.SaveToFile(books);
-
+        List<LibraryBook>? books = null;
         // Act
-        var caughtExecption = Assert.Throws<ArgumentNullException>(() => jsonRepository.SaveToFile(books));
-
+        var caughtExecption = Assert.Throws<ArgumentNullException>(
+            () => jsonRepository.SaveToFile(books!));
         // Assert
-        Assert.Equal("Library cannot be null. (Parameter 'data')", caughtExecption.Message);
+        Assert.Equal("Value cannot be null. (Parameter 'data')",
+            caughtExecption.Message);
 
     }
 

@@ -3,10 +3,11 @@ namespace SmartBook.Repository;
 public class JSONRepository
 {
 
-    private string filePath;
-    private string fileName;
-    private string fileExtension;
-    private DirectoryInfo directoryInformationPath;
+    private readonly string filePath;
+    private readonly string fileName;
+    private readonly string fileExtension;
+    private readonly DirectoryInfo directoryInformationPath;
+
     public JSONRepository(string filePath, string fileName, string fileExtension) {
         this.filePath = filePath;
         this.fileName = fileName;
@@ -22,8 +23,7 @@ public class JSONRepository
         }
     }
     public void SaveToFile(List<LibraryBook> data) {
-        if(data == null)
-            throw new ArgumentNullException(nameof(data), "Library cannot be null.");
+        ArgumentNullException.ThrowIfNull(data);
         string jsonData = JsonSerializer.Serialize(data);
         File.WriteAllText(Path.Combine(filePath, fileName + fileExtension), jsonData);
     }

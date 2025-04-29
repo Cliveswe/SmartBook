@@ -1,10 +1,11 @@
 ﻿using SmartBook.Repository;
 
-namespace SmartBook.Tests;
+
+namespace SmartBook.LibraryTests.Repository;
 public class LibraryTests
 {
     private Library library = Library.Instance;
-    private DummyData dummyData = new();
+    private readonly DummyData dummyData = new();
 
     [Fact]
     public void CreateANewLibraryTest() {

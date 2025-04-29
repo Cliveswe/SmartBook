@@ -1,4 +1,6 @@
-﻿namespace SmartBook.Tests;
+﻿using SmartBook.Tests;
+
+namespace SmartBook.LibraryTests.Repository;
 public class BookTests
 {
     [Fact]
