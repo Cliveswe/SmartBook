@@ -190,7 +190,6 @@ public class LibraryTests
         library.AddBook(book1);
 
         //Assert
-        //Assert.NotEqual(2, library.NumberOfBooks);
         Assert.Throws<ArgumentException>(() => library.AddBook(book2));
     }
 }

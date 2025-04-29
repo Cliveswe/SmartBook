@@ -33,4 +33,45 @@ public class RepositoryTests
         // Assert
         Assert.Equal(jsonRepository.LoadFromFile(), expectedLibrary);
     }
+
+
+    [Fact]
+    public void CheckThatTheLibraryIsNotNullTest() {
+        // Arrange
+        library.ClearLibrary();
+
+        // Act
+        dummyData.PopulateLibrary(ref library);
+
+        // Assert
+        Assert.NotNull(library);
+    }
+
+    [Fact]
+    public void CheckThatTheLibraryIsNotEmptyTest() {
+        // Arrange
+        library.ClearLibrary();
+
+        // Act
+        dummyData.PopulateLibrary(ref library);
+
+        // Assert
+        Assert.NotEmpty(library.Books);
+    }
+
+    [Fact]
+    public void CheckThatSaveToFileNullTest() {
+        //Arrange
+        library.ClearLibrary();
+        List<LibraryBook> books = null;
+        // jsonRepository.SaveToFile(books);
+
+        // Act
+        var caughtExecption = Assert.Throws<ArgumentNullException>(() => jsonRepository.SaveToFile(books));
+
+        // Assert
+        Assert.Equal("Library cannot be null. (Parameter 'data')", caughtExecption.Message);
+
+    }
+
 }
