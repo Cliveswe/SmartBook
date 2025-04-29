@@ -3,79 +3,8 @@
 namespace SmartBook.Tests;
 public class LibraryTests
 {
-
-    /*
-Title: Lorem Ipsum Chronicles
-Author: Dolor Sit
-Category: Fiction
-ISBN: 978-0-123456-47-2
-
-Title: Adventures of Amet Elit
-Author: Amet Elit
-Category: Fantasy
-ISBN: 978-1-234567-89-7
-
-Title: Sed Do Temporalis
-Author: Incididunt Ut
-Category: Science Fiction
-ISBN: 978-0-321-56789-0
-
-Title: Labore et Dolore: A Mystery
-Author: Magna Aliqua
-Category: Mystery
-ISBN: 978-3-16-148410-0
-
-Title: Ut Enim Veniam
-Author: Quis Nostrud
-Category: Romance
-ISBN: 978-0-262-13472-9
-
-Title: Exercitationem: The Escape
-Author: Laboris Nisi
-Category: Thriller
-ISBN: 978-1-4028-9462-6
-
-Title: Aliquip Commodo Quest
-Author: Duis Consequat
-Category: Adventure
-ISBN: 978-0-395-19395-8
-
-Title: Reprehenderit Voluptate: A Tale
-Author: Velit Esse
-Category: Historical Fiction
-ISBN: 978-0-7432-7356-5
-
-Title: Cillum Dolore Eu
-Author: Fugiat Nulla
-Category: Horror
-ISBN: 978-0-7432-7357-2
-
-Title: Excepteur Sint Biography
-Author: Cupidatat Non
-Category: Biography
-ISBN: 978-1-56619-909-4
-    **/
-
     private Library library = Library.Instance;
-    public static List<LibraryBook> ListOfBooks {
-        get {
-            List<LibraryBook> books =
-            [
-                new("Lorem Ipsum Chronicles", "Dolor Sit", "Fiction", "978-0-123456-47-2"),
-            new("Adventures of Amet Elit", "Amet Elit", "Fantasy", "978-1-234567-89-7"),
-            new("Sed Do Temporalis", "Incididunt Ut", "Science Fiction", "978-0-321-56789-0"),
-            new("Labore et Dolore: A Mystery", "Magna Aliqua", "Mystery", "978-3-16-148410-0"),
-            new("Ut Enim Veniam", "Quis Nostrud", "Romance", "978-0-262-13472-9"),
-            new("Exercitationem: The Escape", "Laboris Nisi", "Thriller", "978-1-4028-9462-6"),
-            new("Aliquip Commodo Quest", "Duis Consequat", "Adventure", "978-0-395-19395-8"),
-            new("Reprehenderit Voluptate: A Tale", "Velit Esse", "Historical Fiction", "978-0-7432-7356-5"),
-            new("Cillum Dolore Eu", "Fugiat Nulla", "Horror", "978-0-7432-7357-2"),
-            new("Excepteur Sint Biography", "Cupidatat Non", "Biography", "978-1-56619-909-4"),
-        ];
-
-            return books;
-        }
-    }
+    private DummyData dummyData = new();
 
     [Fact]
     public void CreateANewLibraryTest() {
@@ -83,8 +12,8 @@ ISBN: 978-1-56619-909-4
         library.ClearLibrary();
 
         //Act
-        List<LibraryBook> books = ListOfBooks;
-        PopulateLibrary(ref library);
+        List<LibraryBook> books = dummyData.ListOfBooks;
+        dummyData.PopulateLibrary(ref library);
 
         //Assert
         Assert.Equal(books.Count, library.NumberOfBooks);
@@ -99,7 +28,6 @@ ISBN: 978-1-56619-909-4
 
         //Act
         library.AddBook(book);
-
 
         //Assert
         Assert.Equal(expected, library.NumberOfBooks);
@@ -140,15 +68,7 @@ ISBN: 978-1-56619-909-4
 
     }
 
-    private static void PopulateLibrary(ref Library library) {
-        //Populate the library with books
-        List<LibraryBook> books = ListOfBooks;
-        //Add the books to the library
-        foreach(var book in books) {
-            library.AddBook(book);
-        }
 
-    }
 
     [Fact]
     public void CreateANewLibraryShowAvailableBooksSortedByTitleTest() {
@@ -156,9 +76,9 @@ ISBN: 978-1-56619-909-4
         library.ClearLibrary();
 
         //Act
-        PopulateLibrary(ref library);
+        dummyData.PopulateLibrary(ref library);
         //Create a list of available books
-        IOrderedEnumerable<LibraryBook> listOfBooks = ListOfBooks
+        IOrderedEnumerable<LibraryBook> listOfBooks = dummyData.ListOfBooks
             .Where(b => b.IsAvailable)
             .OrderBy(b => b.Title);
         var libraryResult = library.GetAllAvailableBooksSortedByTitle();
@@ -173,8 +93,8 @@ ISBN: 978-1-56619-909-4
         library.ClearLibrary();
 
         //Act
-        PopulateLibrary(ref library);
-        IOrderedEnumerable<LibraryBook> listOfBooks = ListOfBooks
+        dummyData.PopulateLibrary(ref library);
+        IOrderedEnumerable<LibraryBook> listOfBooks = dummyData.ListOfBooks
             .OrderBy(b => b.Title);
         var libraryResult = library.GetAllBooksSortedByTitle();
 
@@ -191,7 +111,7 @@ ISBN: 978-1-56619-909-4
         LibraryBook expectedBook = new(title, author, category, isbn);
 
         //Act
-        PopulateLibrary(ref library);
+        dummyData.PopulateLibrary(ref library);
         library.GetBook(title, author, out LibraryBook? foundBook);
 
         //Assert
@@ -208,7 +128,7 @@ ISBN: 978-1-56619-909-4
         expectedBook.BorrowLibraryBook();
 
         //Act
-        PopulateLibrary(ref library);
+        dummyData.PopulateLibrary(ref library);
 
         //Search for the book
         bool bookFound = library.GetBook(title, author, out LibraryBook? libraryBook);
@@ -232,8 +152,8 @@ ISBN: 978-1-56619-909-4
         LibraryBook targetBook = new(title, author, category, isbn);
 
         //Act
-        List<LibraryBook> books = ListOfBooks;
-        PopulateLibrary(ref library);
+        List<LibraryBook> books = dummyData.ListOfBooks;
+        dummyData.PopulateLibrary(ref library);
         library.RemoveBookByISBN(isbn);
 
         //Assert
@@ -250,8 +170,8 @@ ISBN: 978-1-56619-909-4
         LibraryBook targetBook = new(title, author, category, isbn);
 
         //Act
-        List<LibraryBook> books = ListOfBooks;
-        PopulateLibrary(ref library);
+        List<LibraryBook> books = dummyData.ListOfBooks;
+        dummyData.PopulateLibrary(ref library);
         library.RemoveBookByTitle(targetBook.Title);
 
         //Assert
@@ -268,7 +188,6 @@ ISBN: 978-1-56619-909-4
 
         //Act
         library.AddBook(book1);
-        //library.AddBook(book2);
 
         //Assert
         //Assert.NotEqual(2, library.NumberOfBooks);

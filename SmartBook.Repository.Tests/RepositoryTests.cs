@@ -6,7 +6,7 @@ public class RepositoryTests
     private Library library = Library.Instance;
     private DummyData dummyData = new();
     private DirectoryInfo directoryInformationPath;
-    JSONRepository jsonRepository;
+    private JSONRepository jsonRepository;
     private readonly string filePath = @"..\..\..\..\Smartbook\Data\";
     private readonly string fileName = "Library";
     private readonly string fileExtension = ".json";
