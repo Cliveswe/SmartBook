@@ -20,11 +20,21 @@ public class JSONRepository
             File.Create(Path.Combine(filePath, fileName + fileExtension)).Close();
         }
     }
-    public void SaveToFile(string data) {
-        // ToDo Implementation for saving data to a JSON file
+    public void SaveToFile(Library data) {
+        if(data == null)
+            throw new ArgumentNullException(nameof(data), "Library cannot be null.");
+        string jsonData = System.Text.Json.JsonSerializer.Serialize(data);
+        File.WriteAllText(Path.Combine(filePath, fileName + fileExtension), jsonData);
     }
-    public string LoadFromFile() {
-        // ToDo Implementation for loading data from a JSON file
-        return string.Empty;
+
+    public Library LoadFromFile() {
+        string data = File.ReadAllText(Path.Combine(filePath, fileName + fileExtension));
+        if(!string.IsNullOrEmpty(data)) {
+            Library? library = System.Text.Json.JsonSerializer.Deserialize<Library>(data);
+            if(library != null) {
+                return library;
+            }
+        }
+        throw new FileNotFoundException("File not found or empty.", Path.Combine(filePath, fileName + fileExtension));
     }
 }
