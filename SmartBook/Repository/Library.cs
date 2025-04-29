@@ -54,7 +54,7 @@ public class Library
             throw new ArgumentNullException(nameof(book), "Book cannot be null.");
 
         if(FindBookByISBN(book.ISBN) != null)
-            throw new ArgumentException($"Book with the same {book.ISBN} already exists in the library.");
+            throw new ArgumentException($"Book with an identical {book.ISBN} already exists in the library.");
 
         Books.Add(book);
     }

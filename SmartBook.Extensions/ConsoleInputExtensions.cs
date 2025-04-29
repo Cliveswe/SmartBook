@@ -45,6 +45,11 @@ public static class ConsoleInputExtensions
 
     }
 
+    public static ConsoleKeyInfo GetAnyKey(this string message) {
+        Console.WriteLine(message);
+        return Console.ReadKey();
+    }
+
     public static void DisplayErrorMessage(this string message) {
         Console.ForegroundColor = ConsoleColor.Red;
         Console.WriteLine(message);

@@ -1,7 +1,6 @@
-﻿
-using SmartBook.Repository;
+﻿using SmartBook.Repository;
 
-namespace SmartBook;
+namespace SmartBook.Application;
 
 public class SmartBookApplication
 {
@@ -13,6 +12,7 @@ public class SmartBookApplication
 
             DisplayMainMenu();
             try {
+
                 Console.Write("Enter a menu choice: ");
                 input = Console.ReadLine()![0];
             } catch(IndexOutOfRangeException) {
@@ -51,28 +51,35 @@ public class SmartBookApplication
 
         LibraryBook book = new LibraryBook(title, author, category, isbn);
         try {
+
             library.AddBook(book);
         } catch(ArgumentNullException ex) {
+
             ex.Message.DisplayErrorMessage();
+            "Press any key to continue...".GetAnyKey();
             return;
         } catch(ArgumentException ex) {
+
             ex.Message.DisplayWarningMessage();
+            "Press any key to continue...".GetAnyKey();
             return;
         }
+
         $"Book {title} by {author} added to the library.".DisplaySuccessMessage();
-        "Press any key to continue...".DisplayStandardMessage();
-        Console.ReadKey();
+        "Press any key to continue...".GetAnyKey();
     }
 
     private void DisplayMainMenu() {
 
         Console.Clear();
         "Welcome to SmartBook!".DisplayStandardMessage();
-        "1. Add a new book".DisplayStandardMessage();
-        "2. Borrow a book".DisplayStandardMessage();
-        "3. Return a book".DisplayStandardMessage();
-        "4. Search for a book".DisplayStandardMessage();
-        "5. List all books".DisplayStandardMessage();
+        "1. Add a new book.".DisplayStandardMessage();
+        "2. Borrow a book.".DisplayStandardMessage();
+        "3. Return a book.".DisplayStandardMessage();
+        "4. Search for a book.".DisplayStandardMessage();
+        "5. List all books.".DisplayStandardMessage();
+        "6. Load library from file.".DisplayStandardMessage();
+        "7. Save library to file.".DisplayStandardMessage();
         "0. Exit".DisplayStandardMessage();
     }
 }
