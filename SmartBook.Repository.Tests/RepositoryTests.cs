@@ -23,7 +23,14 @@ public class RepositoryTests
     }
 
     [Fact]
-    public void CheckThatTheRepositoryJSONIsInTheCorrectDirectoryTest() {
-        Assert.NotNull(directoryInformationPath);
+    public void CheckThatTheLibraryIsSaveAndLoadedTest() {
+        // Arrange
+        JSONRepository jsonRepository = new(filePath, fileName, fileExtension);
+        List<LibraryBook> expectedLibrary = library.GetAllAvailableBooksSortedByTitle();
+
+        // Act
+        jsonRepository.SaveToFile(library.GetAllAvailableBooksSortedByTitle());
+        // Assert
+        Assert.Equal(jsonRepository.LoadFromFile(), expectedLibrary);
     }
 }

@@ -1,4 +1,5 @@
-﻿namespace SmartBook.Repository;
+﻿using System.Text.Json;
+namespace SmartBook.Repository;
 public class JSONRepository
 {
 
@@ -20,19 +21,19 @@ public class JSONRepository
             File.Create(Path.Combine(filePath, fileName + fileExtension)).Close();
         }
     }
-    public void SaveToFile(Library data) {
+    public void SaveToFile(List<LibraryBook> data) {
         if(data == null)
             throw new ArgumentNullException(nameof(data), "Library cannot be null.");
-        string jsonData = System.Text.Json.JsonSerializer.Serialize(data);
+        string jsonData = JsonSerializer.Serialize(data);
         File.WriteAllText(Path.Combine(filePath, fileName + fileExtension), jsonData);
     }
 
-    public Library LoadFromFile() {
+    public List<LibraryBook> LoadFromFile() {
         string data = File.ReadAllText(Path.Combine(filePath, fileName + fileExtension));
         if(!string.IsNullOrEmpty(data)) {
-            Library? library = System.Text.Json.JsonSerializer.Deserialize<Library>(data);
-            if(library != null) {
-                return library;
+            List<LibraryBook>? books = JsonSerializer.Deserialize<List<LibraryBook>>(data);
+            if(books != null) {
+                return books;
             }
         }
         throw new FileNotFoundException("File not found or empty.", Path.Combine(filePath, fileName + fileExtension));
