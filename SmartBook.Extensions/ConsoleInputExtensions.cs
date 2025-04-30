@@ -27,21 +27,25 @@ public static class ConsoleInputExtensions
     }
 
 
-    public static void GetBookISBN(string header, out int isbn) {
-        string? input = string.Empty;
+    public static void GetBookISBN(this string header, out string isbn) {
 
+        bool done = false;
         do {
             Console.Write($"{header}: ");
-            input = Console.ReadLine();
+            isbn = Console.ReadLine()!;
 
-            if(string.IsNullOrEmpty(input) || input.Length > 13 || input.Length < 10) {
-                Console.WriteLine($"An {header} must have at least 13 digits and more " +
-                    $"than 10 digits.");
-                Console.WriteLine($"Please enter a valid {header}.");
+            if(string.IsNullOrWhiteSpace(isbn)) {
+                "An must have at least 13 digits and more than 10 digits.".DisplayErrorMessage();
+                $"Please enter a valid {header}.".DisplayInfoMessage();
                 continue;
             }
-
-        } while(!int.TryParse(Console.ReadLine(), out isbn));
+            else if(isbn.Length > 13 || isbn.Length < 10) {
+                $"An {header} must have at least 13 digits and more than 10 digits.".DisplayErrorMessage();
+                $"Please enter a valid {header}.".DisplayInfoMessage();
+                continue;
+            }
+            done = true;
+        } while(!done);
 
     }
 

@@ -26,6 +26,9 @@ public class SmartBookApplication
                 case '1':
                 AddNewBook();
                 break;
+                case '2':
+                BorrowABook();
+                break;
                 case '5':
                 ListAllBooksInTheLibrary();
                 break;
@@ -41,6 +44,16 @@ public class SmartBookApplication
             }
 
         }
+    }
+
+    private void BorrowABook() {
+        if(library == null || library.NumberOfBooks == 0) {
+            $"The library is empty.".DisplayWarningMessage();
+            "Press any key to continue...".GetAnyKey();
+            return;
+        }
+        string isbn;
+        "Enter the ISBN of the book you want to borrow: ".GetBookISBN(out isbn);
     }
 
     private void ListAllBooksInTheLibrary() {
