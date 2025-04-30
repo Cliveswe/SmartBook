@@ -48,3 +48,26 @@ The application displays a menu with options. Use the number keys to select an a
 The project contains some useful xUnit tests. Depending on how you use the application or use the tests you may have
 to repeat the repository test at least 2 times. This is due to the application or the tests generating a json file
 called library.json.
+
+✅ Unit Tests: BookTests
+
+📁 Namespace: SmartBook.LibraryTests.Repository
+🔍 Purpose: Validates the construction and behavior of the Book class in the SmartBook library.
+🔬 Tests Included:
+
+✅ CreateANewBookTest()
+    Verifies correct creation of a Book object with valid input.
+    Asserts that the ToString() method formats the book details properly.
+❌ CreateANewBookWithMissingTitleTest(...)
+    Tests multiple invalid book creation scenarios using [Theory] and [InlineData].
+    Validates that appropriate ArgumentException messages are thrown when:
+    Title, author, category, or ISBN is empty.
+    ISBN contains invalid characters or has incorrect length.
+📘 CreateANewBookThatIsValidISBN10(...)
+   Confirms that valid ISBN-10 formatted books are accepted and correctly represented.
+📗 CreateANewBookThatIsValidISBN13(...)
+   Confirms that valid ISBN-13 formatted books are accepted and correctly represented.
+💡 Note: These tests help ensure input validation and correct object formatting for the Book class.
+
+
+
