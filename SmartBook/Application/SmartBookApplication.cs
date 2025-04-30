@@ -65,18 +65,38 @@ public class SmartBookApplication
         searchForBook = "Enter either the books title or ISBN to delete it".GetBookDetails();
 
         try {
+
             book = library.GetBookByTitleOrISBN(searchForBook);
         } catch(ArgumentNullException ex) {
+
             ex.Message.DisplayErrorMessage();
             PressAKey();
             return;
         }
         if(book == null) {
+
             "Book not found in the library.".DisplayWarningMessage();
             PressAKey();
             return;
         }
-        library.RemoveBook(book);
+
+        book.ToString().DisplayInfoMessage();
+        "Are you sure you want to delete the book (Y/N)?".DisplayWarningMessage();
+        ConsoleKeyInfo key = Console.ReadKey();
+        if(key.Key == ConsoleKey.Y) {
+
+            library.RemoveBook(book);
+            "Book deleted.".DisplaySuccessMessage();
+            return;
+        }
+        else if(key.Key == ConsoleKey.N) {
+
+            "Book not deleted.".DisplayWarningMessage();
+        }
+        else {
+
+            "Invalid choice.".DisplayErrorMessage();
+        }
         PressAKey();
     }
 
