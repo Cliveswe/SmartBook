@@ -179,4 +179,18 @@ public class Library
             throw new ArgumentNullException(nameof(book), $"Could not find a book with the title {searchForBook} of author {searchForBook}!");
         return book;
     }
+
+    public void DeleteBookByTitleOrISBN(string searchForBook) {
+
+        if(string.IsNullOrWhiteSpace(searchForBook))
+            throw new ArgumentNullException(nameof(searchForBook), "Search term cannot be null or empty.");
+        LibraryBook? book = books
+            .Where(b => b.Title == searchForBook || b.ISBN == searchForBook)
+            .FirstOrDefault();
+        if(book == null)
+            throw new ArgumentNullException(nameof(book), $"Could not find a book with the title {searchForBook} or ISBN {searchForBook}!");
+
+        RemoveBook(book);
+
+    }
 }
