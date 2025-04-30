@@ -29,6 +29,12 @@ public class SmartBookApplication
                 case '2':
                 BorrowABook();
                 break;
+                case '3':
+                ReturnABook();
+                break;
+                case '4':
+                SearchForABook();
+                break;
                 case '5':
                 ListAllBooksInTheLibrary();
                 break;
@@ -46,14 +52,54 @@ public class SmartBookApplication
         }
     }
 
+    private void SearchForABook() {
+        string searchForBook = string.Empty;
+        searchForBook = "Search for a book by Title or Author: ".GetBookDetails();
+    }
+
+    private void ReturnABook() {
+        string isbn;
+        "Enter the ISBN of the book you want to borrow".GetBookISBN(out isbn);
+        try {
+            library.ReturnBorrowedBook(isbn);
+        } catch(ArgumentNullException ex) {
+            BorrowABookBookError("The book has already been returned!", ex.Message);
+            return;
+        } catch(InvalidOperationException ex) {
+            BorrowABookBookError("The book has already been returned!", ex.Message);
+            return;
+        }
+        LibraryBook book = library.GetBook(isbn)!;
+        $"You have now returned the borrowed book:\nTitle: {book.Title}\nBy {book.Author}".DisplaySuccessMessage();
+        PressAKey();
+    }
+
     private void BorrowABook() {
         if(library == null || library.NumberOfBooks == 0) {
             $"The library is empty.".DisplayWarningMessage();
-            "Press any key to continue...".GetAnyKey();
+            PressAKey();
             return;
         }
         string isbn;
-        "Enter the ISBN of the book you want to borrow: ".GetBookISBN(out isbn);
+        "Enter the ISBN of the book you want to borrow".GetBookISBN(out isbn);
+        try {
+            library.BorrowBook(isbn);
+        } catch(ArgumentNullException ex) {
+            BorrowABookBookError("The book is not available for borrowing.", ex.Message);
+            return;
+        } catch(InvalidOperationException ex) {
+            BorrowABookBookError("The book is not available for borrowing.", ex.Message);
+            return;
+        }
+        LibraryBook book = library.GetBook(isbn)!;
+        $"You have successfully borrowed the book:\nTitle: {book.Title}\nBy {book.Author}".DisplaySuccessMessage();
+        PressAKey();
+    }
+
+    private void BorrowABookBookError(string header, string message) {
+        header.DisplayWarningMessage();
+        message.DisplayErrorMessage();
+        PressAKey();
     }
 
     private void ListAllBooksInTheLibrary() {
@@ -68,11 +114,11 @@ public class SmartBookApplication
             }
             $"Total number of books in the library: {library.NumberOfBooks}".DisplayStandardMessage();
             $"Total number of books displayed: {bookCount}".DisplayStandardMessage();
-            "Press any key to continue...".GetAnyKey();
+            PressAKey();
         }
         else {
             "The library is empty of books.".DisplayWarningMessage();
-            "Press any key to continue...".GetAnyKey();
+            PressAKey();
             return;
         }
     }
@@ -89,7 +135,7 @@ public class SmartBookApplication
                 bookCount++;
             } catch(ArgumentNullException ex) {
                 ex.Message.DisplayErrorMessage();
-                "Press any key to continue...".GetAnyKey();
+                PressAKey();
                 return;
             } catch(ArgumentException ex) {
                 ex.Message.DisplayWarningMessage();
@@ -99,19 +145,19 @@ public class SmartBookApplication
 
         if(library.NumberOfBooks == 0) {
             "There are no books in the library and non where added!".DisplayWarningMessage();
-            "Press any key to continue...".GetAnyKey();
+            PressAKey();
             return;
         }
         if(bookCount == 0) {
             "No books where added to the library!".DisplayInfoMessage();
-            "Press any key to continue...".GetAnyKey();
+            PressAKey();
             return;
         }
         if(bookCount > 0) {
             $"Number of books not added to the library: {existingBookCount}".DisplayWarningMessage();
             $"Number of books added to the library: {bookCount}".DisplaySuccessMessage();
             $"Loaded {(Math.Abs(libraryBookCount - library.NumberOfBooks))} books from the file.".DisplaySuccessMessage();
-            "Press any key to continue...".GetAnyKey();
+            PressAKey();
         }
     }
 
@@ -134,16 +180,20 @@ public class SmartBookApplication
         } catch(ArgumentNullException ex) {
 
             ex.Message.DisplayErrorMessage();
-            "Press any key to continue...".GetAnyKey();
+            PressAKey();
             return;
         } catch(ArgumentException ex) {
 
             ex.Message.DisplayWarningMessage();
-            "Press any key to continue...".GetAnyKey();
+            PressAKey();
             return;
         }
 
         $"Book {title} by {author} added to the library.".DisplaySuccessMessage();
+        PressAKey();
+    }
+
+    private void PressAKey() {
         "Press any key to continue...".GetAnyKey();
     }
 

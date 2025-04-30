@@ -40,7 +40,10 @@ public class Library
 
     private LibraryBook? FindBookByISBN(string isbn) {
 
-        return Books.FirstOrDefault(book => book.ISBN == isbn);
+        // return Books.FirstOrDefault(book => book.ISBN == isbn);
+        return books
+             .Where(b => b.ISBN == isbn)
+             .FirstOrDefault();
     }
 
     /// <summary>
@@ -107,6 +110,14 @@ public class Library
             books.Clear();
         }
     }
+    public LibraryBook GetBook(string isbn) {
+        if(string.IsNullOrWhiteSpace(isbn))
+            throw new ArgumentNullException(nameof(isbn), "ISBN cannot be null or empty.");
+        LibraryBook? book = FindBookByISBN(isbn);
+        if(book == null)
+            throw new ArgumentNullException(nameof(book), $"Could not find a book with the ISBN {isbn}");
+        return book;
+    }
 
     public bool GetBook(string title, string author, out LibraryBook? findBook) {
 
@@ -122,6 +133,17 @@ public class Library
         return true;
     }
 
+    public void BorrowBook(string isbn) {
+        LibraryBook book = FindBookByISBN(isbn)!;
+        if(book == null)
+            throw new ArgumentNullException(nameof(book), $"Could not find a book with the ISBN {isbn}");
+        try {
+            BorrowBook(book);
+        } catch(InvalidOperationException ex) {
+            throw new InvalidOperationException($"Could not borrow the book with the ISBN {isbn}", ex);
+        }
+    }
+
     public void BorrowBook(LibraryBook book) {
         if(book == null)
             throw new ArgumentNullException(nameof(book), "Book cannot be null.");
@@ -132,8 +154,18 @@ public class Library
             findBook.BorrowLibraryBook();
         }
         else {
-            throw new InvalidOperationException("The specified book could not be found in the library.");
+            throw new InvalidOperationException("That specified book could not be found in the library.");
         }
     }
 
+    public void ReturnBorrowedBook(string isbn) {
+        LibraryBook book = FindBookByISBN(isbn)!;
+        if(book == null)
+            throw new ArgumentNullException(nameof(book), $"Could not find a book with the ISBN {isbn}");
+        if(book.IsAvailable)
+            throw new InvalidOperationException($"Book with ISBN {isbn} is already available and cannot be returned.");
+        if(!book.ReturnLibraryBook()) {
+            throw new InvalidOperationException($"Book with ISBN {isbn} is not available and can not be returned.");
+        }
+    }
 }

@@ -28,6 +28,16 @@ public class LibraryBook : Book
         }
     }
 
+    public bool ReturnLibraryBook() {
+        if(!IsAvailable) {
+            IsAvailable = true;
+            return true;
+        }
+        else {
+            return false;
+        }
+    }
+
     /// <summary>
     /// Returning a library book.
     /// </summary>
