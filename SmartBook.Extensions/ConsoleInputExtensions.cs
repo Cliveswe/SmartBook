@@ -4,6 +4,11 @@ namespace SmartBook;
 public static class ConsoleInputExtensions
 {
 
+    /// <summary>
+    /// Get the details of a book form the user.
+    /// </summary>
+    /// <param name="header"></param>
+    /// <returns></returns>
     public static string GetBookDetails(this string header) {
         string? details = string.Empty;
 
@@ -26,7 +31,11 @@ public static class ConsoleInputExtensions
         return details;
     }
 
-
+    /// <summary>
+    /// Get the ISBN of a book from the user.
+    /// </summary>
+    /// <param name="header"></param>
+    /// <param name="isbn"></param>
     public static void GetBookISBN(this string header, out string isbn) {
         string? input = string.Empty;
         bool done = false;
@@ -58,33 +67,60 @@ public static class ConsoleInputExtensions
 
     }
 
+    /// <summary>
+    /// Get a string input from the user.
+    /// </summary>
+    /// <param name="message"></param>
+    /// <returns></returns>
     public static ConsoleKeyInfo GetAnyKey(this string message) {
         Console.WriteLine(message);
         return Console.ReadKey();
     }
 
+    /// <summary>
+    /// Display an red error message to the user.
+    /// </summary>
+    /// <param name="message"></param>
     public static void DisplayErrorMessage(this string message) {
         Console.ForegroundColor = ConsoleColor.Red;
         Console.WriteLine(message);
         Console.ResetColor();
     }
 
-
+    /// <summary>
+    /// Display a green success message to the user.
+    /// </summary>
+    /// <param name="message"></param>
     public static void DisplaySuccessMessage(this string message) {
         Console.ForegroundColor = ConsoleColor.Green;
         Console.WriteLine(message);
         Console.ResetColor();
     }
+
+    /// <summary>
+    /// Display a yellow warning message to the user.
+    /// </summary>
+    /// <param name="message"></param>
     public static void DisplayWarningMessage(this string message) {
         Console.ForegroundColor = ConsoleColor.Yellow;
         Console.WriteLine(message);
         Console.ResetColor();
     }
+
+    /// <summary>
+    /// Display a blue information message to the user.
+    /// </summary>
+    /// <param name="message"></param>
     public static void DisplayInfoMessage(this string message) {
         Console.ForegroundColor = ConsoleColor.Cyan;
         Console.WriteLine(message);
         Console.ResetColor();
     }
+
+    /// <summary>
+    /// Display a standard message to the user.
+    /// </summary>
+    /// <param name="message"></param>
     public static void DisplayStandardMessage(this string message) {
         Console.WriteLine(message);
     }
