@@ -38,6 +38,11 @@ public class Library
     /// </summary>
     private Library() => books = [];
 
+    /// <summary>
+    /// Finds a book in the library by its ISBN.
+    /// </summary>
+    /// <param name="isbn"></param>
+    /// <returns></returns>
     private LibraryBook? FindBookByISBN(string isbn) {
 
         // return Books.FirstOrDefault(book => book.ISBN == isbn);
@@ -62,11 +67,19 @@ public class Library
         Books.Add(book);
     }
 
+    /// <summary>
+    /// Gets all books in the library sorted by title.
+    /// </summary>
+    /// <returns></returns>
     public List<LibraryBook> GetAllBooksSortedByTitle() {
 
         return (List<LibraryBook>)[.. books.OrderBy(b => b.Title)];
     }
 
+    /// <summary>
+    /// Gets all available books in the library sorted by title.
+    /// </summary>
+    /// <returns></returns>
     public List<LibraryBook> GetAllAvailableBooksSortedByTitle() {
 
         return (List<LibraryBook>)[.. books
@@ -87,29 +100,21 @@ public class Library
         books.Remove(book);
     }
 
-    //public void RemoveBookByISBN(string isbn) {
-    //    if(string.IsNullOrWhiteSpace(isbn))
-    //        throw new ArgumentNullException(nameof(isbn), "ISBN cannot be null or empty.");
-    //    LibraryBook? book = books.FirstOrDefault(b => b.ISBN == isbn);
-    //    if(book != null) {
-    //        RemoveBook(book);
-    //    }
-    //}
-
-    //public void RemoveBookByTitle(string title) {
-    //    if(string.IsNullOrWhiteSpace(title))
-    //        throw new ArgumentNullException(nameof(title), "title cannot be null or empty.");
-    //    LibraryBook? book = books.FirstOrDefault(b => b.Title == title);
-    //    if(book != null) {
-    //        RemoveBook(book);
-    //    }
-    //}
-
+    /// <summary>
+    /// Clears the library of all books.
+    /// </summary>
     public void ClearLibrary() {
         if(Books.Count > 0) {
             books.Clear();
         }
     }
+
+    /// <summary>
+    /// Gets a book from the library by its ISBN.
+    /// </summary>
+    /// <param name="isbn"></param>
+    /// <returns></returns>
+    /// <exception cref="ArgumentNullException"></exception>
     public LibraryBook GetBook(string isbn) {
         if(string.IsNullOrWhiteSpace(isbn))
             throw new ArgumentNullException(nameof(isbn), "ISBN cannot be null or empty.");
@@ -119,6 +124,14 @@ public class Library
         return book;
     }
 
+    /// <summary>
+    /// Gets a book from the library by its title and author.
+    /// </summary>
+    /// <param name="title"></param>
+    /// <param name="author"></param>
+    /// <param name="findBook"></param>
+    /// <returns></returns>
+    /// <exception cref="ArgumentNullException"></exception>
     public bool GetBook(string title, string author, out LibraryBook? findBook) {
 
         if(string.IsNullOrWhiteSpace(title) || string.IsNullOrWhiteSpace(author))
@@ -133,6 +146,12 @@ public class Library
         return true;
     }
 
+    /// <summary>
+    /// Borrows a book from the library by its ISBN.
+    /// </summary>
+    /// <param name="isbn"></param>
+    /// <exception cref="ArgumentNullException"></exception>
+    /// <exception cref="InvalidOperationException"></exception>
     public void BorrowBook(string isbn) {
         LibraryBook book = FindBookByISBN(isbn)!;
         if(book == null)
@@ -144,6 +163,12 @@ public class Library
         }
     }
 
+    /// <summary>
+    /// Borrows a book from the library.
+    /// </summary>
+    /// <param name="book"></param>
+    /// <exception cref="ArgumentNullException"></exception>
+    /// <exception cref="InvalidOperationException"></exception>
     public void BorrowBook(LibraryBook book) {
         if(book == null)
             throw new ArgumentNullException(nameof(book), "Book cannot be null.");
@@ -158,6 +183,12 @@ public class Library
         }
     }
 
+    /// <summary>
+    /// Returns a borrowed book to the library by its ISBN.
+    /// </summary>
+    /// <param name="isbn"></param>
+    /// <exception cref="ArgumentNullException"></exception>
+    /// <exception cref="InvalidOperationException"></exception>
     public void ReturnBorrowedBook(string isbn) {
         LibraryBook book = FindBookByISBN(isbn)!;
         if(book == null)
@@ -169,6 +200,12 @@ public class Library
         }
     }
 
+    /// <summary>
+    /// Gets a book from the library by its title or author.
+    /// </summary>
+    /// <param name="searchForBook"></param>
+    /// <returns></returns>
+    /// <exception cref="ArgumentNullException"></exception>
     public LibraryBook GetBookByTitleOrAuthor(string searchForBook) {
         if(string.IsNullOrWhiteSpace(searchForBook))
             throw new ArgumentNullException(nameof(searchForBook), "Search term cannot be null or empty.");
@@ -180,6 +217,12 @@ public class Library
         return book;
     }
 
+    /// <summary>
+    /// Gets a book from the library by its title or ISBN.
+    /// </summary>
+    /// <param name="searchForBook"></param>
+    /// <returns></returns>
+    /// <exception cref="ArgumentNullException"></exception>
     public LibraryBook GetBookByTitleOrISBN(string searchForBook) {
 
         if(string.IsNullOrWhiteSpace(searchForBook))
