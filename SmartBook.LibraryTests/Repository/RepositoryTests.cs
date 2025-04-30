@@ -9,17 +9,15 @@ public class RepositoryTests
     private readonly DummyData dummyData = new();
     private DirectoryInfo directoryInformationPath;
     private JSONRepository jsonRepository;
-    private readonly string filePath = @"..\..\..\..\Smartbook\Data\";
-    private readonly string fileName = "Library";
-    private readonly string fileExtension = ".json";
+
 
 
 
     [Fact]
     public void CheckThatTheLibraryIsSaveAndLoadedTest() {
         // Arrange
-        directoryInformationPath = new(filePath);
-        jsonRepository = new JSONRepository(filePath, fileName, fileExtension);
+        directoryInformationPath = new(JSONRepository.FilePath);
+        jsonRepository = new JSONRepository();
         dummyData.PopulateLibrary(ref library);
         List<LibraryBook> expectedLibrary = library.GetAllAvailableBooksSortedByTitle();
 
@@ -37,7 +35,7 @@ public class RepositoryTests
     public void CheckThatSaveToFileNullTest() {
         //Arrange
         List<LibraryBook>? books = null;
-        jsonRepository = new JSONRepository(filePath, fileName, fileExtension);
+        jsonRepository = new JSONRepository();
 
         // Act
         ArgumentNullException caughtExecption = Assert.Throws<ArgumentNullException>(

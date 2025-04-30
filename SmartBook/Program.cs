@@ -1,4 +1,6 @@
-﻿namespace SmartBook
+﻿using SmartBook.Application;
+
+namespace SmartBook
 {
     internal class Program
     {
