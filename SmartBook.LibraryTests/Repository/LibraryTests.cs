@@ -35,6 +35,19 @@ public class LibraryTests
 
     }
 
+    [Theory]
+    [InlineData("Excepteur Sint Biography", "Cupidatat Non", "Biography", "978-1-56619-909-4")]
+    public void SearchForABookByTitleOrAuthorTest(string title, string author, string category, string isbn) {
+        //Arrange
+        library.ClearLibrary();
+        LibraryBook expectedBook = new(title, author, category, isbn, true);
+        //Act
+        dummyData.PopulateLibrary(ref library);
+        library.GetBook(title, author, out LibraryBook? foundBook);
+        //Assert
+        Assert.Equal(expectedBook, foundBook);
+    }
+
 
     [Theory]
     [InlineData("Excepteur Sint Biography", "Cupidatat Non", "Biography", "978-1-56619-909-4", true, 1)]

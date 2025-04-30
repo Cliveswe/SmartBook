@@ -63,10 +63,10 @@ public class SmartBookApplication
         try {
             library.ReturnBorrowedBook(isbn);
         } catch(ArgumentNullException ex) {
-            BorrowABookBookError("The book has already been returned!", ex.Message);
+            BorrowABookError(ex.Message);
             return;
         } catch(InvalidOperationException ex) {
-            BorrowABookBookError("The book has already been returned!", ex.Message);
+            BorrowABookError(ex.Message);
             return;
         }
         LibraryBook book = library.GetBook(isbn)!;
@@ -85,10 +85,10 @@ public class SmartBookApplication
         try {
             library.BorrowBook(isbn);
         } catch(ArgumentNullException ex) {
-            BorrowABookBookError("The book is not available for borrowing.", ex.Message);
+            BorrowABookError(ex.Message);
             return;
         } catch(InvalidOperationException ex) {
-            BorrowABookBookError("The book is not available for borrowing.", ex.Message);
+            BorrowABookError(ex.Message);
             return;
         }
         LibraryBook book = library.GetBook(isbn)!;
@@ -96,8 +96,7 @@ public class SmartBookApplication
         PressAKey();
     }
 
-    private void BorrowABookBookError(string header, string message) {
-        header.DisplayWarningMessage();
+    private void BorrowABookError(string message) {
         message.DisplayErrorMessage();
         PressAKey();
     }

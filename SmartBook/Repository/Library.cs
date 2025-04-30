@@ -168,4 +168,15 @@ public class Library
             throw new InvalidOperationException($"Book with ISBN {isbn} is not available and can not be returned.");
         }
     }
+
+    public LibraryBook FindBook(string searchForBook) {
+        if(string.IsNullOrWhiteSpace(searchForBook))
+            throw new ArgumentNullException(nameof(searchForBook), "Search term cannot be null or empty.");
+        LibraryBook? book = books
+             .Where(b => b.Title == searchForBook || b.Author == searchForBook)
+             .FirstOrDefault();
+        if(book == null)
+            throw new ArgumentNullException(nameof(book), $"Could not find a book with the title {searchForBook}");
+        return book;
+    }
 }
