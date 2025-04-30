@@ -69,7 +69,7 @@ public class SmartBookApplication
         category = "Category".GetBookDetails();
         isbn = "ISBN".GetBookDetails();
 
-        LibraryBook book = new LibraryBook(title, author, category, isbn);
+        LibraryBook book = new LibraryBook(title, author, category, isbn, true);
         try {
 
             library.AddBook(book);

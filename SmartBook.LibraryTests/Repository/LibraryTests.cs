@@ -21,11 +21,11 @@ public class LibraryTests
     }
 
     [Theory]
-    [InlineData("Excepteur Sint Biography", "Cupidatat Non", "Biography", "978-1-56619-909-4", 1)]
-    public void AddOneBookToTheLibraryTest(string title, string author, string category, string isbn, int expected) {
+    [InlineData("Excepteur Sint Biography", "Cupidatat Non", "Biography", "978-1-56619-909-4", true, 1)]
+    public void AddOneBookToTheLibraryTest(string title, string author, string category, string isbn, bool isAvaLiable, int expected) {
         //Arrange
         library.ClearLibrary();
-        LibraryBook book = new(title, author, category, isbn);
+        LibraryBook book = new(title, author, category, isbn, isAvaLiable);
 
         //Act
         library.AddBook(book);
@@ -37,11 +37,11 @@ public class LibraryTests
 
 
     [Theory]
-    [InlineData("Excepteur Sint Biography", "Cupidatat Non", "Biography", "978-1-56619-909-4", 1)]
-    public void AddOneLibraryBookToTheLibraryTest(string title, string author, string category, string isbn, int expected) {
+    [InlineData("Excepteur Sint Biography", "Cupidatat Non", "Biography", "978-1-56619-909-4", true, 1)]
+    public void AddOneLibraryBookToTheLibraryTest(string title, string author, string category, string isbn, bool isAvailable, int expected) {
         //Arrange
         library.ClearLibrary();
-        LibraryBook libraryBook = new(title, author, category, isbn);
+        LibraryBook libraryBook = new(title, author, category, isbn, isAvailable);
 
         //Act
         library.AddBook(libraryBook);
@@ -53,11 +53,11 @@ public class LibraryTests
 
 
     [Theory]
-    [InlineData("Excepteur Sint Biography", "Cupidatat Non", "Biography", "978-1-56619-909-4", 1)]
-    public void AddOneLibraryBookToTheLibraryThenBorrowItTest(string title, string author, string category, string isbn, int expected) {
+    [InlineData("Excepteur Sint Biography", "Cupidatat Non", "Biography", "978-1-56619-909-4", true, 1)]
+    public void AddOneLibraryBookToTheLibraryThenBorrowItTest(string title, string author, string category, string isbn, bool isAvailable, int expected) {
         //Arrange
         library.ClearLibrary();
-        LibraryBook libraryBook = new(title, author, category, isbn);
+        LibraryBook libraryBook = new(title, author, category, isbn, isAvailable);
 
         //Act
         library.AddBook(libraryBook);
@@ -103,11 +103,11 @@ public class LibraryTests
 
 
     [Theory]
-    [InlineData("Excepteur Sint Biography", "Cupidatat Non", "Biography", "978-1-56619-909-4")]
-    public void SearchForABookByAuthorAndTitleTest(string title, string author, string category, string isbn) {
+    [InlineData("Excepteur Sint Biography", "Cupidatat Non", "Biography", "978-1-56619-909-4", true)]
+    public void SearchForABookByAuthorAndTitleTest(string title, string author, string category, string isbn, bool isAvailable) {
         //Arrange
         library.ClearLibrary();
-        LibraryBook expectedBook = new(title, author, category, isbn);
+        LibraryBook expectedBook = new(title, author, category, isbn, isAvailable);
 
         //Act
         dummyData.PopulateLibrary(ref library);
@@ -119,11 +119,11 @@ public class LibraryTests
     }
 
     [Theory]
-    [InlineData("Excepteur Sint Biography", "Cupidatat Non", "Biography", "978-1-56619-909-4")]
-    public void SearchForABookByAuthorAndTitleMarkItAsBorrowedTest(string title, string author, string category, string isbn) {
+    [InlineData("Excepteur Sint Biography", "Cupidatat Non", "Biography", "978-1-56619-909-4", true)]
+    public void SearchForABookByAuthorAndTitleMarkItAsBorrowedTest(string title, string author, string category, string isbn, bool isAvailable) {
         //Arrange
         library.ClearLibrary();
-        LibraryBook expectedBook = new(title, author, category, isbn);
+        LibraryBook expectedBook = new(title, author, category, isbn, isAvailable);
         expectedBook.BorrowLibraryBook();
 
         //Act
@@ -143,12 +143,12 @@ public class LibraryTests
     }
 
     [Theory]
-    [InlineData("Excepteur Sint Biography", "Cupidatat Non", "Biography", "978-1-56619-909-4")]
-    public void RemoveBookByISBN(string title, string author, string category, string isbn) {
+    [InlineData("Excepteur Sint Biography", "Cupidatat Non", "Biography", "978-1-56619-909-4", true)]
+    public void RemoveBookByISBN(string title, string author, string category, string isbn, bool isAvailable) {
 
         //Arrange
         library.ClearLibrary();
-        LibraryBook targetBook = new(title, author, category, isbn);
+        LibraryBook targetBook = new(title, author, category, isbn, isAvailable);
 
         //Act
         List<LibraryBook> books = dummyData.ListOfBooks;
@@ -161,12 +161,12 @@ public class LibraryTests
     }
 
     [Theory]
-    [InlineData("Excepteur Sint Biography", "Cupidatat Non", "Biography", "978-1-56619-909-4")]
-    public void RemoveBookByTitle(string title, string author, string category, string isbn) {
+    [InlineData("Excepteur Sint Biography", "Cupidatat Non", "Biography", "978-1-56619-909-4", true)]
+    public void RemoveBookByTitle(string title, string author, string category, string isbn, bool isAvailable) {
 
         //Arrange
         library.ClearLibrary();
-        LibraryBook targetBook = new(title, author, category, isbn);
+        LibraryBook targetBook = new(title, author, category, isbn, isAvailable);
 
         //Act
         List<LibraryBook> books = dummyData.ListOfBooks;
@@ -182,8 +182,8 @@ public class LibraryTests
     public void AddTwoIdenticalBooksToTheLibraryTest() {
         //Arrange
         library.ClearLibrary();
-        LibraryBook book1 = new("Excepteur Sint Biography", "Cupidatat Non", "Biography", "978-1-56619-909-4");
-        LibraryBook book2 = new("Excepteur Sint Biography", "Cupidatat Non", "Biography", "978-1-56619-909-4");
+        LibraryBook book1 = new("Excepteur Sint Biography", "Cupidatat Non", "Biography", "978-1-56619-909-4", true);
+        LibraryBook book2 = new("Excepteur Sint Biography", "Cupidatat Non", "Biography", "978-1-56619-909-4", true);
 
         //Act
         library.AddBook(book1);

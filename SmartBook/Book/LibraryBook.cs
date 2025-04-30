@@ -9,9 +9,9 @@ public class LibraryBook : Book
         private set;
     }
 
-    public LibraryBook(string title, string author, string category, string isbn, bool isAvaLiable)
+    public LibraryBook(string title, string author, string category, string isbn, bool isAvailable)
         : base(title, author, category, isbn) {
-        IsAvailable = isAvaLiable;
+        IsAvailable = isAvailable;
     }
 
     /// <summary>
