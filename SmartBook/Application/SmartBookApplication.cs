@@ -26,6 +26,9 @@ public class SmartBookApplication
                 case '1':
                 AddNewBook();
                 break;
+                case '5':
+                ListAllBooksInTheLibrary();
+                break;
                 case '6':
                 LoadLibraryFromFile();
                 break;
@@ -36,6 +39,24 @@ public class SmartBookApplication
                 Console.WriteLine("Choice not recognized please choose from the menu.");
                 break;
             }
+
+        }
+    }
+
+    private void ListAllBooksInTheLibrary() {
+        if(library.NumberOfBooks != 0) {
+            Console.Clear();
+            Console.WriteLine("Books in the library:");
+            foreach(LibraryBook book in library.Books) {
+                Console.WriteLine(book.ToString());
+                "----------------------------------".DisplayInfoMessage();
+            }
+            "Press any key to continue...".GetAnyKey();
+        }
+        else {
+            "No books in the library.".DisplayWarningMessage();
+            "Press any key to continue...".GetAnyKey();
+            return;
 
         }
     }
@@ -54,6 +75,16 @@ public class SmartBookApplication
                 "Press any key to continue...".GetAnyKey();
                 return;
             }
+        }
+
+        if(library.NumberOfBooks == 0) {
+            "No books in the library.".DisplayWarningMessage();
+            "Press any key to continue...".GetAnyKey();
+            return;
+        }
+        else {
+            $"Loaded {library.NumberOfBooks} books from the file.".DisplaySuccessMessage();
+            "Press any key to continue...".GetAnyKey();
         }
     }
 
