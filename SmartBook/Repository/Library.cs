@@ -176,7 +176,7 @@ public class Library
              .Where(b => b.Title == searchForBook || b.Author == searchForBook)
              .FirstOrDefault();
         if(book == null)
-            throw new ArgumentNullException(nameof(book), $"Could not find a book with the title {searchForBook}");
+            throw new ArgumentNullException(nameof(book), $"Could not find a book with the title {searchForBook} of author {searchForBook}!");
         return book;
     }
 }

@@ -54,7 +54,18 @@ public class SmartBookApplication
 
     private void SearchForABook() {
         string searchForBook = string.Empty;
-        searchForBook = "Search for a book by Title or Author: ".GetBookDetails();
+        LibraryBook book = null!;
+
+        searchForBook = "Search for a book by Title or Author".GetBookDetails();
+        try {
+            book = library.FindBook(searchForBook);
+        } catch(ArgumentNullException ex) {
+            ex.Message.DisplayErrorMessage();
+            PressAKey();
+            return;
+        }
+        book.ToString().DisplaySuccessMessage();
+        PressAKey();
     }
 
     private void ReturnABook() {
@@ -207,6 +218,7 @@ public class SmartBookApplication
         "5. List all books.".DisplayStandardMessage();
         "6. Load library from file.".DisplayStandardMessage();
         "7. Save library to file.".DisplayStandardMessage();
+        "8. Delete a book from the library.".DisplayStandardMessage();
         "0. Exit".DisplayStandardMessage();
     }
 }
