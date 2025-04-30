@@ -27,20 +27,7 @@ public class SmartBookApplication
                 AddNewBook();
                 break;
                 case '6':
-                JSONRepository jSONRepository = new JSONRepository();
-                foreach(LibraryBook book in jSONRepository.LoadFromFile()) {
-                    try {
-                        library.AddBook(book);
-                    } catch(ArgumentNullException ex) {
-                        ex.Message.DisplayErrorMessage();
-                        "Press any key to continue...".GetAnyKey();
-                        return;
-                    } catch(ArgumentException ex) {
-                        ex.Message.DisplayWarningMessage();
-                        "Press any key to continue...".GetAnyKey();
-                        return;
-                    }
-                }
+                LoadLibraryFromFile();
                 break;
                 case '0':
                 Environment.Exit(0);
@@ -50,6 +37,23 @@ public class SmartBookApplication
                 break;
             }
 
+        }
+    }
+
+    private void LoadLibraryFromFile() {
+        JSONRepository jSONRepository = new JSONRepository();
+        foreach(LibraryBook book in jSONRepository.LoadFromFile()) {
+            try {
+                library.AddBook(book);
+            } catch(ArgumentNullException ex) {
+                ex.Message.DisplayErrorMessage();
+                "Press any key to continue...".GetAnyKey();
+                return;
+            } catch(ArgumentException ex) {
+                ex.Message.DisplayWarningMessage();
+                "Press any key to continue...".GetAnyKey();
+                return;
+            }
         }
     }
 
