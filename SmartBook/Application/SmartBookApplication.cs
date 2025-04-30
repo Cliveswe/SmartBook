@@ -45,45 +45,59 @@ public class SmartBookApplication
 
     private void ListAllBooksInTheLibrary() {
         if(library.NumberOfBooks != 0) {
+            int bookCount = 0;
             Console.Clear();
-            Console.WriteLine("Books in the library:");
+            "List of books in the library:".DisplayStandardMessage();
             foreach(LibraryBook book in library.Books) {
                 Console.WriteLine(book.ToString());
                 "----------------------------------".DisplayInfoMessage();
+                bookCount++;
             }
+            $"Total number of books in the library: {library.NumberOfBooks}".DisplayStandardMessage();
+            $"Total number of books displayed: {bookCount}".DisplayStandardMessage();
             "Press any key to continue...".GetAnyKey();
         }
         else {
-            "No books in the library.".DisplayWarningMessage();
+            "The library is empty of books.".DisplayWarningMessage();
             "Press any key to continue...".GetAnyKey();
             return;
-
         }
     }
 
     private void LoadLibraryFromFile() {
         JSONRepository jSONRepository = new JSONRepository();
+        int existingBookCount = 0;
+        int bookCount = 0;
+        int libraryBookCount = library.NumberOfBooks;
+
         foreach(LibraryBook book in jSONRepository.LoadFromFile()) {
             try {
                 library.AddBook(book);
+                bookCount++;
             } catch(ArgumentNullException ex) {
                 ex.Message.DisplayErrorMessage();
                 "Press any key to continue...".GetAnyKey();
                 return;
             } catch(ArgumentException ex) {
                 ex.Message.DisplayWarningMessage();
-                "Press any key to continue...".GetAnyKey();
-                return;
+                existingBookCount++;
             }
         }
 
         if(library.NumberOfBooks == 0) {
-            "No books in the library.".DisplayWarningMessage();
+            "There are no books in the library and non where added!".DisplayWarningMessage();
             "Press any key to continue...".GetAnyKey();
             return;
         }
-        else {
-            $"Loaded {library.NumberOfBooks} books from the file.".DisplaySuccessMessage();
+        if(bookCount == 0) {
+            "No books where added to the library!".DisplayInfoMessage();
+            "Press any key to continue...".GetAnyKey();
+            return;
+        }
+        if(bookCount > 0) {
+            $"Number of books not added to the library: {existingBookCount}".DisplayWarningMessage();
+            $"Number of books added to the library: {bookCount}".DisplaySuccessMessage();
+            $"Loaded {(Math.Abs(libraryBookCount - library.NumberOfBooks))} books from the file.".DisplaySuccessMessage();
             "Press any key to continue...".GetAnyKey();
         }
     }
