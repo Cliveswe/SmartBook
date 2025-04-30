@@ -5,6 +5,10 @@ namespace SmartBook.Application;
 public class SmartBookApplication
 {
     Library library = Library.Instance;
+
+    /// <summary>
+    /// Main method to start the application.
+    /// </summary>
     public void Start() {
         char input = ' ';
 
@@ -20,7 +24,6 @@ public class SmartBookApplication
                 Console.Clear();
                 Console.WriteLine("Please enter some input!");
             }
-
 
             switch(input) {
                 case '1':
@@ -42,8 +45,7 @@ public class SmartBookApplication
                 LoadLibraryFromFile();
                 break;
                 case '7':
-                //ToDo Save library to file.
-
+                SaveLibraryToFile();
                 break;
                 case '8':
                 DeleteABookFromTheLibrary();
@@ -59,6 +61,9 @@ public class SmartBookApplication
         }
     }
 
+    /// <summary>
+    /// Delete a book from the library. User is prompted to enter the title or ISBN of the book to delete as a search parameter.
+    /// </summary>
     private void DeleteABookFromTheLibrary() {
         string searchForBook = string.Empty;
         LibraryBook book = null!;
@@ -83,11 +88,11 @@ public class SmartBookApplication
         book.ToString().DisplayInfoMessage();
         "Are you sure you want to delete the book (Y/N)?".DisplayWarningMessage();
         ConsoleKeyInfo key = Console.ReadKey();
+        Console.WriteLine();
         if(key.Key == ConsoleKey.Y) {
 
             library.RemoveBook(book);
             "Book deleted.".DisplaySuccessMessage();
-            return;
         }
         else if(key.Key == ConsoleKey.N) {
 
@@ -100,6 +105,9 @@ public class SmartBookApplication
         PressAKey();
     }
 
+    /// <summary>
+    /// Search for a book in the library by title or author. User is prompted to enter the title or author of the book as a search parameter.
+    /// </summary>
     private void SearchForABook() {
         string searchForBook = string.Empty;
         LibraryBook book = null!;
@@ -116,6 +124,9 @@ public class SmartBookApplication
         PressAKey();
     }
 
+    /// <summary>
+    /// Return a book to the library. User is prompted to enter the ISBN of the book to return as a search parameter.
+    /// </summary>
     private void ReturnABook() {
         string isbn;
         "Enter the ISBN of the book you want to borrow".GetBookISBN(out isbn);
@@ -133,6 +144,9 @@ public class SmartBookApplication
         PressAKey();
     }
 
+    /// <summary>
+    /// Borrow a book from the library. User is prompted to enter the ISBN of the book to borrow as a search parameter.
+    /// </summary>
     private void BorrowABook() {
         if(library == null || library.NumberOfBooks == 0) {
             $"The library is empty.".DisplayWarningMessage();
@@ -155,11 +169,18 @@ public class SmartBookApplication
         PressAKey();
     }
 
+    /// <summary>
+    /// Display an error message when borrowing a book fails.
+    /// </summary>
+    /// <param name="message"></param>
     private void BorrowABookError(string message) {
         message.DisplayErrorMessage();
         PressAKey();
     }
 
+    /// <summary>
+    /// List all books in the library. If the library is empty, display a warning message.
+    /// </summary>
     private void ListAllBooksInTheLibrary() {
         if(library.NumberOfBooks != 0) {
             int bookCount = 0;
@@ -181,6 +202,9 @@ public class SmartBookApplication
         }
     }
 
+    /// <summary>
+    /// Load the library from a file. If the file does not exist, display an error message.
+    /// </summary>
     private void LoadLibraryFromFile() {
         JSONRepository jSONRepository = new JSONRepository();
         int existingBookCount = 0;
@@ -219,6 +243,26 @@ public class SmartBookApplication
         }
     }
 
+    /// <summary>
+    /// Save the library to a file. If the library is empty, display a warning message.
+    /// </summary>
+    private void SaveLibraryToFile() {
+        JSONRepository jSONRepository = new JSONRepository();
+
+        if(library.NumberOfBooks == 0) {
+            "Cannot save an empty library to a file.".DisplayWarningMessage();
+            PressAKey();
+            return;
+        }
+
+        jSONRepository.SaveToFile(library.Books);
+        $"Library saved to file: {JSONRepository.PathToFile}".DisplaySuccessMessage();
+        PressAKey();
+    }
+
+    /// <summary>
+    /// Add a new book to the library. User is prompted to enter the title, author, category, and ISBN of the book.
+    /// </summary>
     private void AddNewBook() {
         string title = string.Empty;
         string author = string.Empty;
@@ -251,10 +295,16 @@ public class SmartBookApplication
         PressAKey();
     }
 
+    /// <summary>
+    /// Display a message prompting the user to press any key to continue.
+    /// </summary>
     private void PressAKey() {
         "Press any key to continue...".GetAnyKey();
     }
 
+    /// <summary>
+    /// Display the main menu of the application.
+    /// </summary>
     private void DisplayMainMenu() {
 
         Console.Clear();

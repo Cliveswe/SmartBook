@@ -87,23 +87,23 @@ public class Library
         books.Remove(book);
     }
 
-    public void RemoveBookByISBN(string isbn) {
-        if(string.IsNullOrWhiteSpace(isbn))
-            throw new ArgumentNullException(nameof(isbn), "ISBN cannot be null or empty.");
-        LibraryBook? book = books.FirstOrDefault(b => b.ISBN == isbn);
-        if(book != null) {
-            RemoveBook(book);
-        }
-    }
+    //public void RemoveBookByISBN(string isbn) {
+    //    if(string.IsNullOrWhiteSpace(isbn))
+    //        throw new ArgumentNullException(nameof(isbn), "ISBN cannot be null or empty.");
+    //    LibraryBook? book = books.FirstOrDefault(b => b.ISBN == isbn);
+    //    if(book != null) {
+    //        RemoveBook(book);
+    //    }
+    //}
 
-    public void RemoveBookByTitle(string title) {
-        if(string.IsNullOrWhiteSpace(title))
-            throw new ArgumentNullException(nameof(title), "title cannot be null or empty.");
-        LibraryBook? book = books.FirstOrDefault(b => b.Title == title);
-        if(book != null) {
-            RemoveBook(book);
-        }
-    }
+    //public void RemoveBookByTitle(string title) {
+    //    if(string.IsNullOrWhiteSpace(title))
+    //        throw new ArgumentNullException(nameof(title), "title cannot be null or empty.");
+    //    LibraryBook? book = books.FirstOrDefault(b => b.Title == title);
+    //    if(book != null) {
+    //        RemoveBook(book);
+    //    }
+    //}
 
     public void ClearLibrary() {
         if(Books.Count > 0) {
