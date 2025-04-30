@@ -4,11 +4,22 @@ namespace SmartBook;
 
 public class LibraryBook : Book
 {
+    /// <summary>
+    /// Gets or sets the availability of the library book.
+    /// </summary>
     public bool IsAvailable {
         get;
         private set;
     }
 
+    /// <summary>
+    /// Constructor for the LibraryBook class.
+    /// </summary>
+    /// <param name="title"></param>
+    /// <param name="author"></param>
+    /// <param name="category"></param>
+    /// <param name="isbn"></param>
+    /// <param name="isAvailable"></param>
     public LibraryBook(string title, string author, string category, string isbn, bool isAvailable)
         : base(title, author, category, isbn) {
         IsAvailable = isAvailable;
@@ -28,6 +39,10 @@ public class LibraryBook : Book
         }
     }
 
+    /// <summary>
+    /// Returning a library book.
+    /// </summary>
+    /// <returns></returns>
     public bool ReturnLibraryBook() {
         if(!IsAvailable) {
             IsAvailable = true;
@@ -61,6 +76,10 @@ public class LibraryBook : Book
         return HashCode.Combine(Title, Author, Category, ISBN);
     }
 
+    /// <summary>
+    /// Overrides the ToString method to provide a string representation of the books availability.
+    /// </summary>
+    /// <returns></returns>
     public override string ToString() {
         return $"{base.ToString()}Available: {(IsAvailable ? "Yes" : "No")}";
     }
