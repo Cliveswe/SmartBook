@@ -2,16 +2,12 @@
 
 namespace SmartBook.LibraryTests.Repository;
 
-
 public class RepositoryTests
 {
     private Library library = Library.Instance;
     private readonly DummyData dummyData = new();
-    private DirectoryInfo directoryInformationPath;
-    private JSONRepository jsonRepository;
-
-
-
+    private DirectoryInfo? directoryInformationPath;
+    private JSONRepository? jsonRepository;
 
     [Fact]
     public void CheckThatTheLibraryIsSaveAndLoadedTest() {

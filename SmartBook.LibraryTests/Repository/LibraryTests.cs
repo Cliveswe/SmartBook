@@ -1,6 +1,5 @@
 ﻿using SmartBook.Repository;
 
-
 namespace SmartBook.LibraryTests.Repository;
 public class LibraryTests
 {
@@ -155,41 +154,6 @@ public class LibraryTests
         Assert.False(libraryBook?.IsAvailable);
     }
 
-    //[Theory]
-    //[InlineData("Excepteur Sint Biography", "Cupidatat Non", "Biography", "978-1-56619-909-4", true)]
-    //public void RemoveBookByISBN(string title, string author, string category, string isbn, bool isAvailable) {
-
-    //    //Arrange
-    //    library.ClearLibrary();
-    //    LibraryBook targetBook = new(title, author, category, isbn, isAvailable);
-
-    //    //Act
-    //    List<LibraryBook> books = dummyData.ListOfBooks;
-    //    dummyData.PopulateLibrary(ref library);
-    //    library.RemoveBookByISBN(isbn);
-
-    //    //Assert
-    //    Assert.Equal(books.Count - 1, library.NumberOfBooks);
-    //    Assert.DoesNotContain(targetBook, library.Books);
-    //}
-
-    //[Theory]
-    //[InlineData("Excepteur Sint Biography", "Cupidatat Non", "Biography", "978-1-56619-909-4", true)]
-    //public void RemoveBookByTitle(string title, string author, string category, string isbn, bool isAvailable) {
-
-    //    //Arrange
-    //    library.ClearLibrary();
-    //    LibraryBook targetBook = new(title, author, category, isbn, isAvailable);
-
-    //    //Act
-    //    List<LibraryBook> books = dummyData.ListOfBooks;
-    //    dummyData.PopulateLibrary(ref library);
-    //    library.RemoveBookByTitle(targetBook.Title);
-
-    //    //Assert
-    //    Assert.Equal(books.Count - 1, library.NumberOfBooks);
-    //    Assert.DoesNotContain(targetBook, library.Books);
-    //}
 
     [Fact]
     public void AddTwoIdenticalBooksToTheLibraryTest() {

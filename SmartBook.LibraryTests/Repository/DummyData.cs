@@ -21,6 +21,10 @@ public class DummyData
         }
     }
 
+    /// <summary>
+    /// Populates the library with a list of books.
+    /// </summary>
+    /// <param name="library"></param>
     public void PopulateLibrary(ref Library library) {
         //Populate the library with books
         List<LibraryBook> books = ListOfBooks;
