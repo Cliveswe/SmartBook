@@ -41,6 +41,13 @@ public class SmartBookApplication
                 case '6':
                 LoadLibraryFromFile();
                 break;
+                case '7':
+                //ToDo Save library to file.
+
+                break;
+                case '8':
+                DeleteABookFromTheLibrary();
+                break;
                 case '0':
                 Environment.Exit(0);
                 break;
@@ -52,13 +59,23 @@ public class SmartBookApplication
         }
     }
 
+    private void DeleteABookFromTheLibrary() {
+        string searchForBook = string.Empty;
+        LibraryBook book = null!;
+        searchForBook = "Enter either the books title or ISBN to delete it".GetBookDetails();
+
+        try {
+        }
+        PressAKey();
+    }
+
     private void SearchForABook() {
         string searchForBook = string.Empty;
         LibraryBook book = null!;
 
         searchForBook = "Search for a book by Title or Author".GetBookDetails();
         try {
-            book = library.FindBook(searchForBook);
+            book = library.GetBookByTitleOrAuthor(searchForBook);
         } catch(ArgumentNullException ex) {
             ex.Message.DisplayErrorMessage();
             PressAKey();

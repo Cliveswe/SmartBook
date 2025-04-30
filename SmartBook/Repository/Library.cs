@@ -169,7 +169,7 @@ public class Library
         }
     }
 
-    public LibraryBook FindBook(string searchForBook) {
+    public LibraryBook GetBookByTitleOrAuthor(string searchForBook) {
         if(string.IsNullOrWhiteSpace(searchForBook))
             throw new ArgumentNullException(nameof(searchForBook), "Search term cannot be null or empty.");
         LibraryBook? book = books
