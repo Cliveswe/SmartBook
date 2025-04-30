@@ -65,7 +65,18 @@ public class SmartBookApplication
         searchForBook = "Enter either the books title or ISBN to delete it".GetBookDetails();
 
         try {
+            book = library.GetBookByTitleOrISBN(searchForBook);
+        } catch(ArgumentNullException ex) {
+            ex.Message.DisplayErrorMessage();
+            PressAKey();
+            return;
         }
+        if(book == null) {
+            "Book not found in the library.".DisplayWarningMessage();
+            PressAKey();
+            return;
+        }
+        library.RemoveBook(book);
         PressAKey();
     }
 

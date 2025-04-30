@@ -180,7 +180,7 @@ public class Library
         return book;
     }
 
-    public void DeleteBookByTitleOrISBN(string searchForBook) {
+    public LibraryBook GetBookByTitleOrISBN(string searchForBook) {
 
         if(string.IsNullOrWhiteSpace(searchForBook))
             throw new ArgumentNullException(nameof(searchForBook), "Search term cannot be null or empty.");
@@ -190,7 +190,7 @@ public class Library
         if(book == null)
             throw new ArgumentNullException(nameof(book), $"Could not find a book with the title {searchForBook} or ISBN {searchForBook}!");
 
-        RemoveBook(book);
+        return book;
 
     }
 }
