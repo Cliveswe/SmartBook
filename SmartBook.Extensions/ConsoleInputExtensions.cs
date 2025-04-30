@@ -28,20 +28,29 @@ public static class ConsoleInputExtensions
 
 
     public static void GetBookISBN(this string header, out string isbn) {
-
+        string? input = string.Empty;
         bool done = false;
+
         do {
             Console.Write($"{header}: ");
             isbn = Console.ReadLine()!;
+            input = isbn.Replace("-", "").Trim();
 
             if(string.IsNullOrWhiteSpace(isbn)) {
-                "An must have at least 13 digits and more than 10 digits.".DisplayErrorMessage();
-                $"Please enter a valid {header}.".DisplayInfoMessage();
+
+                $"\"{isbn}\" is not a valid ISBN.".DisplayErrorMessage();
+                $"An ISBN must have more than 10 digits and at least 13 digits.".DisplayErrorMessage();
                 continue;
             }
-            else if(isbn.Length > 13 || isbn.Length < 10) {
-                $"An {header} must have at least 13 digits and more than 10 digits.".DisplayErrorMessage();
-                $"Please enter a valid {header}.".DisplayInfoMessage();
+            else if(input.Length > 13 || input.Length < 10) {
+
+                $"{isbn} is not a valid ISBN.".DisplayErrorMessage();
+                $"An ISBN must have more than 10 digits and at least 13 digits.".DisplayErrorMessage();
+                continue;
+            }
+            else if(input.Any(char.IsLetter) && !(input.EndsWith("X", StringComparison.OrdinalIgnoreCase) && input.Length == 10)) {
+                $"{isbn} is not a valid ISBN.".DisplayErrorMessage();
+                $"An ISBN must not contain letters, except possibly an 'X' at the end for ISBN-10.".DisplayErrorMessage();
                 continue;
             }
             done = true;
