@@ -9,13 +9,9 @@ public class LibraryBook : Book
         private set;
     }
 
-    //public bool OnLoan => !IsAvailable;
-    //public bool Available => IsAvailable;
-
-    public LibraryBook(string title, string author, string category, string isbn)
+    public LibraryBook(string title, string author, string category, string isbn, bool isAvaLiable)
         : base(title, author, category, isbn) {
-
-        IsAvailable = true;
+        IsAvailable = isAvaLiable;
     }
 
     /// <summary>
