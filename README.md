@@ -162,3 +162,101 @@ called library.json.
     Populates the given Library instance with the full set of predefined books by calling AddBook() on each item in ListOfBooks.
 
     💡 Note: This class is primarily used in unit tests and setup routines to ensure consistent, repeatable test data.
+
+# 📘 SmartBook Log Utility
+
+The `Log` class in the `SmartBook.Utilities` namespace provides a **singleton logging utility** that enables easy logging of informational messages and exceptions to a file. It uses **lazy initialization** and the **singleton pattern** to ensure a single, thread-safe instance of the logger is used throughout the application.
+
+---
+
+## 🔧 Features
+
+- ✅ Singleton pattern with `Lazy<T>`
+- ✅ Logs informational messages and exceptions
+- ✅ Automatically creates the log file if it doesn't exist
+- ✅ Appends to existing logs
+- ✅ Includes timestamps on all entries
+- ✅ Outputs to a configurable path and filename
+
+---
+
+## 🛠 Class: `SmartBook.Utilities.Log`
+
+### Properties
+
+| Property       | Description                                   |
+|----------------|-----------------------------------------------|
+| `Instance`     | Gets the singleton instance of the `Log` class. |
+| `PathToFile`   | The full path to the log file.                |
+
+---
+
+### Methods
+
+#### `void LogMessage(string message)`
+Logs a standard informational message.
+
+```csharp
+Log.Instance.LogMessage("Application started.");
+
+void LogMessage(Exception ex, string? message = null)
+
+Logs an exception with an optional custom message.
+
+try
+{
+    // some failing code
+}
+catch (Exception ex)
+{
+    Log.Instance.LogMessage(ex, "Something went wrong in the data service.");
+}
+
+📁 Log File Location
+
+Logs are saved to:
+
+..\..\..\..\Smartbook\Data\Log.txt
+
+This path is defined by combining:
+
+    FilePath: ..\..\..\..\Smartbook\Data\
+
+    FileName: Log
+
+    FileExtension: .txt
+
+📦 Example Usage
+
+using SmartBook.Utilities;
+
+class Program
+{
+    static void Main()
+    {
+        Log.Instance.LogMessage("Program initialized.");
+
+        try
+        {
+            throw new InvalidOperationException("Test exception");
+        }
+        catch (Exception ex)
+        {
+            Log.Instance.LogMessage(ex, "An error occurred during initialization.");
+        }
+    }
+}
+
+🧪 Notes
+
+    StreamWriter is used in append mode, so old log entries are preserved.
+
+    The class uses StringBuilder to format exception messages for better readability.
+
+📜 License
+
+This utility is part of the SmartBook project. Feel free to modify and reuse within the scope of your application needs.
+
+
+---
+
