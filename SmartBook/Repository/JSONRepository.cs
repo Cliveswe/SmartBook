@@ -1,4 +1,5 @@
-﻿using System.Text.Json;
+﻿using SmartBook.Utilities;
+using System.Text.Json;
 namespace SmartBook.Repository;
 public class JSONRepository
 {
@@ -42,8 +43,13 @@ public class JSONRepository
     /// </summary>
     /// <param name="data"></param>
     public void SaveToFile(List<LibraryBook> data) {
-        ArgumentNullException.ThrowIfNull(data);
 
+        if(data == null) {
+            string message = "Data cannot be null.";
+            Log.Instance.LogMessage(new ArgumentNullException(nameof(data), message));
+            throw new ArgumentNullException(nameof(data), message);
+        }
+        Log.Instance.LogMessage("Saving data to file.");
         string jsonData = JsonSerializer.Serialize(data);
         File.WriteAllText(PathToFile, jsonData);
     }
@@ -58,9 +64,11 @@ public class JSONRepository
         if(!string.IsNullOrEmpty(data)) {
             List<LibraryBook>? books = JsonSerializer.Deserialize<List<LibraryBook>>(data);
             if(books != null) {
+                Log.Instance.LogMessage("Loading data from file.");
                 return books;
             }
         }
+        Log.Instance.LogMessage(new FileNotFoundException("File not found or empty.", PathToFile), "File not found or empty.");
         throw new FileNotFoundException("File not found or empty.", PathToFile);
     }
 
@@ -70,6 +78,7 @@ public class JSONRepository
     public void DeleteFile() {
         // Remove the file if it exists
         if(File.Exists(PathToFile)) {
+            Log.Instance.LogMessage($"Deleting file {PathToFile}");
             File.Delete(PathToFile);
         }
     }
