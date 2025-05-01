@@ -38,7 +38,7 @@ public class RepositoryTests
             () => jsonRepository.SaveToFile(books!));
 
         // Assert
-        Assert.Equal("Value cannot be null. (Parameter 'data')",
+        Assert.Equal("Data cannot be null. (Parameter 'data')",
             caughtExecption.Message);
 
         // Clean up the test data

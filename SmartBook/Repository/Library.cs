@@ -1,4 +1,6 @@
-﻿namespace SmartBook.Repository;
+﻿using SmartBook.Utilities;
+
+namespace SmartBook.Repository;
 /// <summary>
 /// Singleton class that represents a library.
 /// </summary>
@@ -45,7 +47,7 @@ public class Library
     /// <returns></returns>
     private LibraryBook? FindBookByISBN(string isbn) {
 
-        // return Books.FirstOrDefault(book => book.ISBN == isbn);
+        Log.Instance.LogMessage($"Searching for book with ISBN {isbn} in the library.");
         return books
              .Where(b => b.ISBN == isbn)
              .FirstOrDefault();
@@ -58,12 +60,19 @@ public class Library
     /// <exception cref="ArgumentNullException"></exception>
     public void AddBook(LibraryBook book) {
 
-        if(book == null)
-            throw new ArgumentNullException(nameof(book), "Book cannot be null.");
+        if(book == null) {
 
-        if(FindBookByISBN(book.ISBN) != null)
-            throw new ArgumentException($"Book with an identical {book.ISBN} already exists in the library.");
+            string message = "Book cannot be null.";
+            Log.Instance.LogMessage(new ArgumentNullException(nameof(book), message));
+            throw new ArgumentNullException(nameof(book), message);
+        }
+        if(FindBookByISBN(book.ISBN) != null) {
 
+            string message = $"Book with an identical {book.ISBN} already exists in the library.";
+            Log.Instance.LogMessage(new ArgumentException(message), message);
+            throw new ArgumentException(message);
+        }
+        Log.Instance.LogMessage($"Adding book with ISBN {book.ISBN} to the library.");
         Books.Add(book);
     }
 
@@ -73,6 +82,7 @@ public class Library
     /// <returns></returns>
     public List<LibraryBook> GetAllBooksSortedByTitle() {
 
+        Log.Instance.LogMessage("Getting all books in the library sorted by title.");
         return (List<LibraryBook>)[.. books.OrderBy(b => b.Title)];
     }
 
@@ -82,6 +92,7 @@ public class Library
     /// <returns></returns>
     public List<LibraryBook> GetAllAvailableBooksSortedByTitle() {
 
+        Log.Instance.LogMessage("Getting all available books in the library sorted by title.");
         return (List<LibraryBook>)[.. books
              .Where(b => b.IsAvailable)
              .OrderBy(b => b.Title)];
@@ -94,9 +105,15 @@ public class Library
     /// <param name="book"></param>
     /// <exception cref="ArgumentNullException"></exception>
     public void RemoveBook(LibraryBook book) {
-        if(book == null)
-            throw new ArgumentNullException(nameof(book), "Book cannot be null.");
 
+        if(book == null) {
+
+            string message = "Book cannot be null.";
+            Log.Instance.LogMessage(new ArgumentNullException(nameof(book), message));
+            throw new ArgumentNullException(nameof(book), message);
+        }
+
+        Log.Instance.LogMessage($"Removing book with ISBN {book.ISBN} from the library.");
         books.Remove(book);
     }
 
@@ -105,6 +122,7 @@ public class Library
     /// </summary>
     public void ClearLibrary() {
         if(Books.Count > 0) {
+            Log.Instance.LogMessage("Clearing the library of all books.");
             books.Clear();
         }
     }
@@ -116,11 +134,22 @@ public class Library
     /// <returns></returns>
     /// <exception cref="ArgumentNullException"></exception>
     public LibraryBook GetBook(string isbn) {
-        if(string.IsNullOrWhiteSpace(isbn))
-            throw new ArgumentNullException(nameof(isbn), "ISBN cannot be null or empty.");
+
+        if(string.IsNullOrWhiteSpace(isbn)) {
+
+            string message = "ISBN cannot be null or empty.";
+            Log.Instance.LogMessage(new ArgumentNullException(nameof(isbn), message));
+            throw new ArgumentNullException(nameof(isbn), message);
+        }
         LibraryBook? book = FindBookByISBN(isbn);
-        if(book == null)
-            throw new ArgumentNullException(nameof(book), $"Could not find a book with the ISBN {isbn}");
+        if(book == null) {
+
+            string message = $"Could not find a book with the ISBN {isbn}";
+            Log.Instance.LogMessage(new ArgumentNullException(nameof(book), message));
+            throw new ArgumentNullException(nameof(book), message);
+        }
+
+        Log.Instance.LogMessage($"Getting book with ISBN {isbn} from the library.");
         return book;
     }
 
@@ -134,15 +163,23 @@ public class Library
     /// <exception cref="ArgumentNullException"></exception>
     public bool GetBook(string title, string author, out LibraryBook? findBook) {
 
-        if(string.IsNullOrWhiteSpace(title) || string.IsNullOrWhiteSpace(author))
-            throw new ArgumentNullException("Title and author cannot be null or empty.");
+        if(string.IsNullOrWhiteSpace(title) || string.IsNullOrWhiteSpace(author)) {
 
+            string message = "Title and author cannot be null or empty.";
+            Log.Instance.LogMessage(new ArgumentNullException(nameof(title), message));
+            throw new ArgumentNullException(message);
+        }
+        Log.Instance.LogMessage($"Searching for book with title {title} and author {author} in the library.");
         findBook = books
                .Where(b => b.Title == title && b.Author == author).FirstOrDefault();
 
-        if(findBook == null)
-            return false;
+        if(findBook == null) {
 
+            Log.Instance.LogMessage($"Could not find a book with the title {title} and author {author}");
+            return false;
+        }
+
+        Log.Instance.LogMessage($"Found book with title {title} and author {author} in the library.");
         return true;
     }
 
