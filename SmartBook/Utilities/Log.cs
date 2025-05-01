@@ -34,9 +34,7 @@ public sealed class Log
     /// The singleton instance of the Log class. Using Lazy<T> to ensure that the instance is created only when it is needed.
     /// </summary>
     public static Log Instance => instance.Value;
-        
 
-    }
     private Log() {
         PathToFile = Path.Combine(FilePath, FileName + FileExtension);
     }

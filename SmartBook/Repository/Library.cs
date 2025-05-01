@@ -191,12 +191,21 @@ public class Library
     /// <exception cref="InvalidOperationException"></exception>
     public void BorrowBook(string isbn) {
         LibraryBook book = FindBookByISBN(isbn)!;
-        if(book == null)
-            throw new ArgumentNullException(nameof(book), $"Could not find a book with the ISBN {isbn}");
+        if(book == null) {
+
+            string message = $"Could not find a book with the ISBN {isbn}";
+            Log.Instance.LogMessage(new ArgumentNullException(nameof(book), message));
+            throw new ArgumentNullException(nameof(book), message);
+        }
         try {
+
+            Log.Instance.LogMessage($"Borrowing book with ISBN {isbn} from the library.");
             BorrowBook(book);
         } catch(InvalidOperationException ex) {
-            throw new InvalidOperationException($"Could not borrow the book with the ISBN {isbn}", ex);
+
+            string message = $"Book with ISBN {isbn} is not available for borrowing.";
+            Log.Instance.LogMessage(ex, message);
+            throw new InvalidOperationException(message, ex);
         }
     }
 
@@ -207,16 +216,28 @@ public class Library
     /// <exception cref="ArgumentNullException"></exception>
     /// <exception cref="InvalidOperationException"></exception>
     public void BorrowBook(LibraryBook book) {
-        if(book == null)
-            throw new ArgumentNullException(nameof(book), "Book cannot be null.");
-        if(!book.BorrowLibraryBook())
-            throw new InvalidOperationException("Book is not available for borrowing.");
+        if(book == null) {
 
+            string message = "Book cannot be null.";
+            Log.Instance.LogMessage(new ArgumentNullException(nameof(book), message));
+            throw new ArgumentNullException(nameof(book), message);
+        }
+        if(!book.BorrowLibraryBook()) {
+
+            string message = "Book is not available for borrowing.";
+            Log.Instance.LogMessage(new InvalidOperationException(message), message);
+            throw new InvalidOperationException(message);
+        }
         if(GetBook(book.Title, book.Author, out LibraryBook? findBook) && findBook != null) {
+
+            Log.Instance.LogMessage($"Borrowing book with title {book.Title} and author {book.Author} from the library.");
             findBook.BorrowLibraryBook();
         }
         else {
-            throw new InvalidOperationException("That specified book could not be found in the library.");
+
+            string message = $"Could not find a book with the title {book.Title} and author {book.Author}";
+            Log.Instance.LogMessage(new InvalidOperationException(message), message);
+            throw new InvalidOperationException(message);
         }
     }
 
@@ -228,13 +249,26 @@ public class Library
     /// <exception cref="InvalidOperationException"></exception>
     public void ReturnBorrowedBook(string isbn) {
         LibraryBook book = FindBookByISBN(isbn)!;
-        if(book == null)
-            throw new ArgumentNullException(nameof(book), $"Could not find a book with the ISBN {isbn}");
-        if(book.IsAvailable)
-            throw new InvalidOperationException($"Book with ISBN {isbn} is already available and cannot be returned.");
-        if(!book.ReturnLibraryBook()) {
-            throw new InvalidOperationException($"Book with ISBN {isbn} is not available and can not be returned.");
+        if(book == null) {
+
+            string message = $"Could not find a book with the ISBN {isbn}";
+            Log.Instance.LogMessage(new ArgumentNullException(nameof(book), message));
+            throw new ArgumentNullException(nameof(book), message);
         }
+        if(book.IsAvailable) {
+
+            string message = $"Book with ISBN {isbn} is already available and cannot be returned.";
+            Log.Instance.LogMessage(new InvalidOperationException(message), message);
+            throw new InvalidOperationException(message);
+        }
+        if(!book.ReturnLibraryBook()) {
+
+            string message = $"Book with ISBN {isbn} is not available and cannot be returned.";
+            Log.Instance.LogMessage(new InvalidOperationException(message), message);
+            throw new InvalidOperationException(message);
+        }
+
+        Log.Instance.LogMessage($"Returning book {book.Title} by {book.Author} ISBN: {isbn} to the library.");
     }
 
     /// <summary>
@@ -244,13 +278,23 @@ public class Library
     /// <returns></returns>
     /// <exception cref="ArgumentNullException"></exception>
     public LibraryBook GetBookByTitleOrAuthor(string searchForBook) {
-        if(string.IsNullOrWhiteSpace(searchForBook))
-            throw new ArgumentNullException(nameof(searchForBook), "Search term cannot be null or empty.");
+        if(string.IsNullOrWhiteSpace(searchForBook)) {
+
+            string message = "Search term cannot be null or empty.";
+            Log.Instance.LogMessage(new ArgumentNullException(nameof(searchForBook), message));
+            throw new ArgumentNullException(nameof(searchForBook), message);
+        }
+        Log.Instance.LogMessage($"Searching for book with title {searchForBook} or author {searchForBook} in the library.");
         LibraryBook? book = books
              .Where(b => b.Title == searchForBook || b.Author == searchForBook)
              .FirstOrDefault();
-        if(book == null)
-            throw new ArgumentNullException(nameof(book), $"Could not find a book with the title {searchForBook} of author {searchForBook}!");
+        if(book == null) {
+
+            string message = $"Could not find a book with the title {searchForBook} or author {searchForBook}!";
+            Log.Instance.LogMessage(new ArgumentNullException(nameof(book), message));
+            throw new ArgumentNullException(nameof(book), message);
+        }
+        Log.Instance.LogMessage($"Found book with title {searchForBook} or author {searchForBook} in the library.");
         return book;
     }
 
@@ -262,14 +306,23 @@ public class Library
     /// <exception cref="ArgumentNullException"></exception>
     public LibraryBook GetBookByTitleOrISBN(string searchForBook) {
 
-        if(string.IsNullOrWhiteSpace(searchForBook))
-            throw new ArgumentNullException(nameof(searchForBook), "Search term cannot be null or empty.");
+        if(string.IsNullOrWhiteSpace(searchForBook)) {
+
+            string message = "Search term cannot be null or empty.";
+            Log.Instance.LogMessage(new ArgumentNullException(nameof(searchForBook), message));
+            throw new ArgumentNullException(nameof(searchForBook), message);
+        }
+        Log.Instance.LogMessage($"Searching for book with title {searchForBook} or ISBN {searchForBook} in the library.");
         LibraryBook? book = books
             .Where(b => b.Title == searchForBook || b.ISBN == searchForBook)
             .FirstOrDefault();
-        if(book == null)
-            throw new ArgumentNullException(nameof(book), $"Could not find a book with the title {searchForBook} or ISBN {searchForBook}!");
+        if(book == null) {
 
+            string message = $"Could not find a book with the title {searchForBook} or ISBN {searchForBook}!";
+            Log.Instance.LogMessage(new ArgumentNullException(nameof(book), message));
+            throw new ArgumentNullException(nameof(book), message);
+        }
+        Log.Instance.LogMessage($"Found book with title {searchForBook} or ISBN {searchForBook} in the library.");
         return book;
 
     }

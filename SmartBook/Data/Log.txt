@@ -1,0 +1,35 @@
+2025-05-01 10:07:48 - INFORMATION: Loading data from file.
+2025-05-01 10:07:48 - INFORMATION: Searching for book with ISBN 978-1-234567-89-7 in the library.
+2025-05-01 10:07:48 - INFORMATION: Adding book with ISBN 978-1-234567-89-7 to the library.
+2025-05-01 10:07:48 - INFORMATION: Searching for book with ISBN 978-0-395-19395-8 in the library.
+2025-05-01 10:07:48 - INFORMATION: Adding book with ISBN 978-0-395-19395-8 to the library.
+2025-05-01 10:07:48 - INFORMATION: Searching for book with ISBN 978-0-7432-7357-2 in the library.
+2025-05-01 10:07:48 - INFORMATION: Adding book with ISBN 978-0-7432-7357-2 to the library.
+2025-05-01 10:07:48 - INFORMATION: Searching for book with ISBN 978-1-56619-909-4 in the library.
+2025-05-01 10:07:48 - INFORMATION: Adding book with ISBN 978-1-56619-909-4 to the library.
+2025-05-01 10:07:48 - INFORMATION: Searching for book with ISBN 978-1-4028-9462-6 in the library.
+2025-05-01 10:07:48 - INFORMATION: Adding book with ISBN 978-1-4028-9462-6 to the library.
+2025-05-01 10:07:48 - INFORMATION: Searching for book with ISBN 978-3-16-148410-0 in the library.
+2025-05-01 10:07:48 - INFORMATION: Adding book with ISBN 978-3-16-148410-0 to the library.
+2025-05-01 10:07:48 - INFORMATION: Searching for book with ISBN 978-0-123456-47-2 in the library.
+2025-05-01 10:07:48 - INFORMATION: Adding book with ISBN 978-0-123456-47-2 to the library.
+2025-05-01 10:07:48 - INFORMATION: Searching for book with ISBN 978-0-7432-7356-5 in the library.
+2025-05-01 10:07:48 - INFORMATION: Adding book with ISBN 978-0-7432-7356-5 to the library.
+2025-05-01 10:07:48 - INFORMATION: Searching for book with ISBN 978-0-321-56789-0 in the library.
+2025-05-01 10:07:48 - INFORMATION: Adding book with ISBN 978-0-321-56789-0 to the library.
+2025-05-01 10:07:48 - INFORMATION: Searching for book with ISBN 978-0-262-13472-9 in the library.
+2025-05-01 10:07:48 - INFORMATION: Adding book with ISBN 978-0-262-13472-9 to the library.
+2025-05-01 10:08:04 - INFORMATION: Searching for book with ISBN 978-0-262-13472-9 in the library.
+2025-05-01 10:08:04 - INFORMATION: Borrowing book with ISBN 978-0-262-13472-9 from the library.
+2025-05-01 10:08:04 - INFORMATION: Searching for book with title Ut Enim Veniam and author Quis Nostrud in the library.
+2025-05-01 10:08:04 - INFORMATION: Found book with title Ut Enim Veniam and author Quis Nostrud in the library.
+2025-05-01 10:08:04 - INFORMATION: Borrowing book with title Ut Enim Veniam and author Quis Nostrud from the library.
+2025-05-01 10:08:04 - INFORMATION: Searching for book with ISBN 978-0-262-13472-9 in the library.
+2025-05-01 10:08:04 - INFORMATION: Getting book with ISBN 978-0-262-13472-9 from the library.
+2025-05-01 10:08:13 - INFORMATION: Searching for book with ISBN 978-0-262-13472-9 in the library.
+2025-05-01 10:08:13 - INFORMATION: Returning book with ISBN 978-0-262-13472-9 to the library.
+2025-05-01 10:08:13 - INFORMATION: Searching for book with ISBN 978-0-262-13472-9 in the library.
+2025-05-01 10:08:13 - INFORMATION: Getting book with ISBN 978-0-262-13472-9 from the library.
+2025-05-01 10:08:56 - INFORMATION: Searching for book with title 978-0-262-13472-9 or ISBN 978-0-262-13472-9 in the library.
+2025-05-01 10:08:56 - INFORMATION: Found book with title 978-0-262-13472-9 or ISBN 978-0-262-13472-9 in the library.
+2025-05-01 10:08:59 - INFORMATION: Removing book with ISBN 978-0-262-13472-9 from the library.
