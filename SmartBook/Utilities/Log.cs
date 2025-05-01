@@ -20,20 +20,25 @@ public sealed class Log
     /// <summary>
     /// The full path to the file where the log is stored.
     /// </summary>
-    public static string PathToFile => Path.Combine(FilePath, FileName + FileExtension);
-
-    private static readonly Log instance = new Log();
+    public static string PathToFile {
+        get;
+        private set;
+    }
 
     /// <summary>
-    /// Singleton instance of the Log class.
+    /// Instance of the log class. Using Lazy<T> to ensure that the instance is created only when it is needed.
     /// </summary>
-    public static Log Instance {
-        get {
-            if(instance != null)
-                return instance;
-            return new Log();
-        }
+    private static readonly Lazy<Log> instance = new Lazy<Log>(static () => new Log());
 
+    /// <summary>
+    /// The singleton instance of the Log class. Using Lazy<T> to ensure that the instance is created only when it is needed.
+    /// </summary>
+    public static Log Instance => instance.Value;
+        
+
+    }
+    private Log() {
+        PathToFile = Path.Combine(FilePath, FileName + FileExtension);
     }
 
     /// <summary>
